@@ -1,0 +1,4009 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Other Projects | FDR World Collection</title>
+
+    <script>document.documentElement.classList.add('js');</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@500;700;900&family=Special+Elite&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <meta name="description" content="Past projects, media gallery, and expertise from the FDR World team." />
+    <meta name="keywords" content="FDR World, projects, portfolio, media, game development, historical fiction" />
+    <meta name="theme-color" content="#050505" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f4f3ef" media="(prefers-color-scheme: light)" />
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧊</text></svg>" />
+
+    <!-- Three.js for the page-level starfield (grafted from index_v50) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        /* ========================================
+           DESIGN TOKENS — Noir Amber (refined v13)
+           + Chapter bar / search / filters
+           + Mobile nav / toast / sticky CTA
+           + Robust scroll-reveal (mobile-safe)
+        ======================================== */
+        :root {
+            --color-bg: #050505;
+            --color-surface: #0f0f0f;
+            --color-surface-2: #161616;
+            --color-surface-raised: #1e1e1e;
+            --color-surface-hover: #252525;
+            --color-border: rgba(255, 255, 255, 0.08);
+            --color-border-accent: rgba(255, 107, 53, 0.45);
+            --color-text: #f0efec;
+            --color-text-muted: #9a9994;
+            --color-text-faint: #5a5955;
+            --color-accent: #ff6b35;
+            --color-accent-hover: #ff8555;
+            --color-accent-glow: rgba(255, 107, 53, 0.35);
+            --color-gold: #d4af37;
+            --color-gold-bright: #ffd700;
+            --color-cyan: #00d4ff;
+            --color-copper: #b87333;
+
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-headline: 'Cinzel', serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-typewriter: 'Special Elite', 'Courier New', monospace;
+
+            --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+            --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+            --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+            --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+            --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+            --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+            --text-hero: clamp(3rem, 1rem + 5vw, 6rem);
+
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-20: 5rem;
+            --space-24: 6rem;
+
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-full: 9999px;
+
+            --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
+            --ease-apple: cubic-bezier(0.4, 0, 0.2, 1);
+            --dur-fast: 0.25s;
+            --dur-mid: 0.5s;
+            --dur-slow: 0.9s;
+
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6);
+            --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 32px rgba(0, 0, 0, 0.32);
+
+            --content-default: 1200px;
+            --nav-height: 56px;
+            --chapter-height: 46px;
+        }
+
+        /* ========================================
+           LIGHT THEME
+        ======================================== */
+        [data-theme="light"] {
+            --color-bg: #f4f3ef;
+            --color-surface: #faf9f6;
+            --color-surface-2: #ffffff;
+            --color-surface-raised: #ffffff;
+            --color-surface-hover: #f0ede8;
+            --color-border: rgba(0, 0, 0, 0.08);
+            --color-border-accent: rgba(192, 72, 72, 0.4);
+            --color-text: #1a1917;
+            --color-text-muted: #5e5d5a;
+            --color-text-faint: #a0a09c;
+            --color-accent: #c84820;
+            --color-accent-hover: #a83818;
+            --color-accent-glow: rgba(200, 72, 32, 0.2);
+            --color-gold: #9a7a1a;
+            --color-gold-bright: #b89020;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.15);
+            --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ========================================
+           BASE RESET
+        ======================================== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            scroll-padding-top: calc(var(--nav-height) + var(--chapter-height) + 20px);
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: var(--text-base);
+            line-height: 1.65;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            /* `clip` keeps position:sticky working (unlike `hidden`) */
+            overflow-x: hidden;
+            overflow-x: clip;
+            transition: background-color var(--dur-mid) ease, color var(--dur-mid) ease;
+            min-height: 100dvh;
+            padding-top: var(--nav-height);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Anchor offset fix — sections land below fixed nav + chapter bar */
+        section[id],
+        main [id] {
+            scroll-margin-top: calc(var(--nav-height) + var(--chapter-height) + 20px);
+        }
+
+        img,
+        picture,
+        video,
+        canvas,
+        svg {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        ul[role="list"],
+        ol[role="list"] {
+            list-style: none;
+        }
+        input,
+        button,
+        textarea,
+        select {
+            font: inherit;
+            color: inherit;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            text-wrap: balance;
+            line-height: 1.15;
+        }
+        p,
+        li {
+            text-wrap: pretty;
+        }
+        button {
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 3px;
+            border-radius: var(--radius-sm);
+        }
+
+        /* ========================================
+           SCROLL REVEAL — only active when JS is on
+           (progressive enhancement: no JS = everything visible)
+        ======================================== */
+        .js .js-reveal {
+            opacity: 0;
+            translate: 0 22px;
+            transition:
+                opacity 0.75s var(--ease-expo),
+                translate 0.75s var(--ease-expo),
+                transform 0.5s var(--ease-apple),
+                border-color 0.25s ease,
+                box-shadow 0.5s ease,
+                background 0.25s ease;
+            will-change: opacity, translate;
+        }
+        .js .js-reveal.is-visible {
+            opacity: 1;
+            translate: 0 0;
+        }
+        .js .js-reveal.is-visible {
+            will-change: auto;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .hero__bg {
+                animation: none !important;
+            }
+            .hero__particle {
+                animation: none !important;
+                opacity: 0 !important;
+            }
+            .js .js-reveal {
+                opacity: 1 !important;
+                translate: none !important;
+            }
+        }
+
+        /* ========================================
+           SCROLL PROGRESS
+        ======================================== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-gold));
+            z-index: 10000;
+            width: 0;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 8px var(--color-accent-glow);
+        }
+
+        /* ========================================
+           NAVIGATION (Apple-style)
+        ======================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            background: rgba(5, 5, 5, 0.82);
+            backdrop-filter: saturate(180%) blur(24px);
+            -webkit-backdrop-filter: saturate(180%) blur(24px);
+            z-index: 9999;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            transition: background var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+        }
+
+        [data-theme="light"] .nav {
+            background: rgba(244, 243, 239, 0.88);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav.scrolled {
+            background: rgba(5, 5, 5, 0.97);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="light"] .nav.scrolled {
+            background: rgba(244, 243, 239, 0.98);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav__container {
+            max-width: var(--content-default);
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .nav__logo {
+            font-family: var(--font-headline);
+            font-size: var(--text-lg);
+            font-weight: 700;
+            color: var(--color-text);
+            text-decoration: none;
+            letter-spacing: 1.5px;
+            transition: color var(--dur-fast);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            white-space: nowrap;
+        }
+        .nav__logo:hover {
+            color: var(--color-accent);
+        }
+
+        .nav__actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .nav__theme-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-full);
+            color: var(--color-text-muted);
+            transition: color var(--dur-fast), background var(--dur-fast), transform var(--dur-fast);
+        }
+        .nav__theme-btn:hover {
+            color: var(--color-text);
+            background: rgba(255, 255, 255, 0.08);
+            transform: rotate(-15deg);
+        }
+        [data-theme="light"] .nav__theme-btn:hover {
+            background: rgba(0, 0, 0, 0.06);
+        }
+
+        .nav__link--primary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: 9px 22px;
+            background: var(--color-accent);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: var(--text-sm);
+            border-radius: var(--radius-full);
+            transition: background var(--dur-fast), transform var(--dur-fast), box-shadow var(--dur-fast);
+            box-shadow: 0 3px 12px var(--color-accent-glow);
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+        .nav__link--primary:hover {
+            background: var(--color-accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px var(--color-accent-glow);
+        }
+        [data-theme="light"] .nav__link--primary {
+            color: #fff;
+        }
+
+        /* Mobile hamburger */
+        .nav__menu-toggle {
+            display: none;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            color: var(--color-text);
+            transition: background var(--dur-fast);
+        }
+        .nav__menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        [data-theme="light"] .nav__menu-toggle:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .nav__menu-toggle {
+                display: flex;
+            }
+            .nav__link--primary {
+                display: none;
+            }
+        }
+
+        /* Mobile slide-in panel */
+        .nav-mobile-panel {
+            position: fixed;
+            top: var(--nav-height);
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(8, 8, 8, 0.98);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            z-index: 9998;
+            transform: translateX(100%);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: transform 0.4s var(--ease-expo), opacity 0.35s var(--ease-expo), visibility 0s linear 0.4s;
+            padding: var(--space-8) var(--space-6);
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+        [data-theme="light"] .nav-mobile-panel {
+            background: rgba(244, 243, 239, 0.98);
+        }
+        .nav-mobile-panel.open {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transition: transform 0.4s var(--ease-expo), opacity 0.35s var(--ease-expo), visibility 0s;
+        }
+        .nav-mobile-panel__close {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-5);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text);
+            font-size: 1.4rem;
+            border-radius: var(--radius-md);
+            transition: background var(--dur-fast);
+        }
+        .nav-mobile-panel__close:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .nav-mobile-panel__links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 0;
+            margin: 40px 0 0;
+        }
+        .nav-mobile-panel__link {
+            display: block;
+            padding: 14px 16px;
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--color-text);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: background var(--dur-fast), color var(--dur-fast);
+        }
+        .nav-mobile-panel__link:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--color-accent);
+        }
+        [data-theme="light"] .nav-mobile-panel__link:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+        .nav-mobile-panel__link--cta {
+            margin-top: var(--space-6);
+            text-align: center;
+            background: var(--color-accent);
+            color: #fff !important;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .nav-mobile-panel__link--cta:hover {
+            background: var(--color-accent-hover);
+        }
+
+        /* ========================================
+           CHAPTER BAR — sticky sub-nav
+        ======================================== */
+        .chapter-bar {
+            position: sticky;
+            top: var(--nav-height);
+            z-index: 900;
+            height: var(--chapter-height);
+            background: rgba(5, 5, 5, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+        }
+
+        [data-theme="light"] .chapter-bar {
+            background: rgba(250, 248, 244, 0.88);
+            border-bottom-color: rgba(0, 0, 0, 0.08);
+        }
+
+        .chapter-bar__inner {
+            max-width: var(--content-default);
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+            padding: 0 var(--space-6);
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            justify-content: center;
+        }
+        .chapter-bar__inner::-webkit-scrollbar {
+            display: none;
+        }
+
+        .chapter-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 16px;
+            font-size: var(--text-xs);
+            font-weight: 500;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color var(--dur-fast);
+            letter-spacing: 0.3px;
+            border-radius: var(--radius-md);
+        }
+        .chapter-link:hover {
+            color: var(--color-text);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        [data-theme="light"] .chapter-link:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+        .chapter-link.is-active {
+            color: var(--color-text);
+        }
+        .chapter-link.is-active::after {
+            content: '';
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: 4px;
+            height: 2px;
+            background: var(--color-accent);
+            transform: scaleX(1);
+            transform-origin: center;
+            transition: transform 0.3s var(--ease-expo);
+            box-shadow: 0 0 8px var(--color-accent-glow);
+        }
+
+        @media (max-width: 640px) {
+            .chapter-bar__inner {
+                justify-content: flex-start;
+                padding: 0 var(--space-4);
+            }
+        }
+
+        /* ========================================
+           HERO (cinematic)
+        ======================================== */
+        .hero {
+            position: relative;
+            height: 68vh;
+            height: 68svh;
+            min-height: 460px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--color-bg);
+        }
+
+        .hero__bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 160%;
+            background: url('http://fdrworld.com/aBbgUDm.jpeg') center/cover no-repeat;
+            background-color: #0a0a0a;
+            opacity: 0.28;
+            will-change: transform;
+            animation: heroDrift 80s linear infinite;
+        }
+        [data-theme="light"] .hero__bg {
+            opacity: 0.18;
+        }
+
+        @keyframes heroDrift {
+            from {
+                transform: scale(1.06) translateY(0);
+            }
+            to {
+                transform: scale(1.06) translateY(-28%);
+            }
+        }
+
+        .hero__grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 107, 53, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 107, 53, 0.04) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero__overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 70% at 50% 100%, transparent 40%, var(--color-bg) 90%);
+            z-index: 2;
+        }
+
+        .hero__particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .hero__particle {
+            position: absolute;
+            bottom: -10px;
+            width: 3px;
+            height: 3px;
+            background: var(--color-gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleRise var(--pdur, 20s) var(--pdelay, 0s) ease-in-out infinite;
+        }
+
+        @keyframes particleRise {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(1);
+            }
+            10% {
+                opacity: 0.6;
+            }
+            80% {
+                opacity: 0.2;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-80vh) scale(0.3);
+            }
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 0 var(--space-6);
+            max-width: 760px;
+        }
+
+        .hero__eyebrow {
+            font-family: var(--font-headline);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: var(--space-4);
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-expo) 0.2s forwards;
+        }
+
+        .hero__icon {
+            font-size: 3.5rem;
+            margin-bottom: var(--space-4);
+            display: block;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-expo) 0.35s forwards;
+        }
+
+        .hero__title {
+            font-family: var(--font-display);
+            font-size: var(--text-hero);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-5);
+            color: var(--color-accent);
+            background: linear-gradient(135deg, #de6262 0%, #ffb88c 55%, #d4af37 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            animation: fadeUp 0.9s var(--ease-expo) 0.5s forwards;
+        }
+        @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+            .hero__title {
+                -webkit-text-fill-color: currentColor;
+                color: #ff8555;
+            }
+        }
+        [data-theme="light"] .hero__title {
+            background: linear-gradient(135deg, #b03030 0%, #c96030 55%, #8a6010 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero__subtitle {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            font-weight: 400;
+            line-height: 1.7;
+            max-width: 560px;
+            margin: 0 auto var(--space-8);
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-expo) 0.7s forwards;
+        }
+
+        .hero__scroll-hint {
+            position: absolute;
+            bottom: var(--space-8);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--color-text-faint);
+            font-size: var(--text-xs);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 1s var(--ease-expo) 1.4s forwards;
+            z-index: 10;
+        }
+
+        .hero__scroll-icon {
+            width: 22px;
+            height: 36px;
+            border: 1.5px solid var(--color-text-faint);
+            border-radius: 11px;
+            position: relative;
+        }
+        .hero__scroll-icon::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 7px;
+            background: var(--color-accent);
+            border-radius: 2px;
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .emoji-pulse {
+            display: inline-block;
+            animation: epulse 2.4s ease-in-out infinite;
+        }
+        @keyframes epulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.14);
+            }
+        }
+
+        /* ========================================
+           DIVIDER
+        ======================================== */
+        .divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+            margin: 0 var(--space-8);
+        }
+
+        /* ========================================
+           SECTIONS
+        ======================================== */
+        .section {
+            padding: clamp(var(--space-12), 8vw, var(--space-24)) var(--space-6);
+            max-width: var(--content-default);
+            margin: 0 auto;
+        }
+
+        .section__header {
+            text-align: center;
+            margin-bottom: var(--space-12);
+        }
+
+        .section__icon {
+            font-size: 2.6rem;
+            margin-bottom: var(--space-4);
+            display: block;
+        }
+
+        .section__eyebrow {
+            font-family: var(--font-headline);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: var(--space-3);
+            display: block;
+        }
+
+        .section__title {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            margin-bottom: var(--space-4);
+            color: var(--color-accent);
+            background: linear-gradient(135deg, #de6262 0%, #ffb88c 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+            .section__title {
+                -webkit-text-fill-color: currentColor;
+                color: #ff8555;
+            }
+        }
+        [data-theme="light"] .section__title {
+            background: linear-gradient(135deg, #b03030 0%, #c96030 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section__subtitle {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            max-width: 620px;
+            margin: 0 auto;
+            line-height: 1.75;
+        }
+
+        /* ========================================
+           PROJECT TOOLS — search + chips
+        ======================================== */
+        .project-tools {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-4);
+            margin-bottom: var(--space-10);
+        }
+
+        .project-search {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            width: 100%;
+            max-width: 560px;
+            padding: 13px 22px;
+            border-radius: var(--radius-full);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            transition: border-color var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
+        }
+        .project-search:focus-within {
+            border-color: var(--color-accent);
+            background: var(--color-surface-2);
+            box-shadow: 0 0 0 4px var(--color-accent-glow);
+        }
+        .project-search input {
+            flex: 1;
+            min-width: 0;
+            background: none;
+            border: 0;
+            outline: 0;
+            color: var(--color-text);
+            font-size: var(--text-sm);
+            font-family: var(--font-body);
+        }
+        .project-search input::placeholder {
+            color: var(--color-text-faint);
+        }
+
+        .project-chips {
+            display: flex;
+            gap: var(--space-2);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .chip {
+            padding: 9px 18px;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--color-border);
+            background: transparent;
+            color: var(--color-text-muted);
+            font-size: var(--text-xs);
+            font-family: var(--font-body);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast);
+        }
+        .chip:hover {
+            background: var(--color-surface-hover);
+            color: var(--color-text);
+            transform: translateY(-1px);
+        }
+        .chip.is-active {
+            background: var(--color-text);
+            color: var(--color-bg);
+            border-color: transparent;
+            font-weight: 600;
+        }
+
+        .project-count {
+            text-align: center;
+            font-size: var(--text-xs);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-text-faint);
+            margin-top: var(--space-2);
+        }
+
+        .feature-card.is-hidden {
+            display: none !important;
+        }
+
+        /* Empty state */
+        .project-empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: var(--space-12) var(--space-6);
+            background: var(--color-surface);
+            border: 1px dashed var(--color-border);
+            border-radius: var(--radius-lg);
+            color: var(--color-text-muted);
+            font-size: var(--text-sm);
+            display: none;
+        }
+        .project-empty.is-visible {
+            display: block;
+        }
+        .project-empty__icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: var(--space-3);
+            opacity: 0.5;
+        }
+
+        /* ========================================
+           PROJECT CARDS
+        ======================================== */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+            gap: var(--space-6);
+        }
+
+        .feature-card {
+            position: relative;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-card);
+            transition:
+                transform var(--dur-mid) var(--ease-apple),
+                border-color var(--dur-fast) ease,
+                box-shadow var(--dur-mid) ease,
+                background var(--dur-fast) ease,
+                opacity 0.75s var(--ease-expo),
+                translate 0.75s var(--ease-expo);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--color-border-accent);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 24px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--color-border-accent);
+            background: var(--color-surface-2);
+        }
+        [data-theme="light"] .feature-card:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 18px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--color-border-accent);
+        }
+
+        /* Top accent line */
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-accent), var(--color-gold), transparent);
+            opacity: 0;
+            transition: opacity var(--dur-mid) ease;
+            z-index: 1;
+        }
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            font-size: var(--text-xs);
+            font-family: var(--font-headline);
+            font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-4);
+            opacity: 0.85;
+        }
+
+        .feature-card__icon {
+            font-size: 2.8rem;
+            margin-bottom: var(--space-4);
+            display: block;
+            line-height: 1;
+        }
+
+        .feature-card__title {
+            font-family: var(--font-headline);
+            font-size: var(--text-base);
+            font-weight: 700;
+            color: var(--color-text);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: var(--space-3);
+            line-height: 1.3;
+        }
+
+        .feature-card__description {
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            font-size: var(--text-sm);
+            flex: 1;
+            margin-bottom: var(--space-5);
+        }
+
+        .feature-card__link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: var(--text-xs);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color var(--dur-fast), gap var(--dur-fast);
+            margin-top: auto;
+            width: fit-content;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+        }
+        .feature-card__link:hover {
+            color: var(--color-gold);
+            gap: var(--space-3);
+            border-bottom-color: var(--color-gold);
+        }
+
+        /* ========================================
+           GALLERY
+        ======================================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr));
+            gap: var(--space-6);
+        }
+
+        .gallery-item {
+            position: relative;
+            margin: 0;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            background: var(--color-surface);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+            transition:
+                transform var(--dur-mid) var(--ease-apple),
+                box-shadow var(--dur-mid) ease,
+                border-color var(--dur-mid),
+                opacity 0.75s var(--ease-expo),
+                translate 0.75s var(--ease-expo);
+        }
+        .gallery-item:hover {
+            transform: translateY(-6px) scale(1.015);
+            box-shadow: var(--shadow-lg);
+            z-index: 2;
+            border-color: var(--color-border-accent);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+            transition: transform var(--dur-slow) var(--ease-expo);
+            background: var(--color-surface-raised);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.06);
+        }
+
+        .gallery-item__caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: var(--space-5);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, transparent 100%);
+            color: #fff;
+            font-family: var(--font-headline);
+            font-size: var(--text-xs);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transform: translateY(100%);
+            transition: transform var(--dur-fast) var(--ease-expo);
+        }
+        .gallery-item:hover .gallery-item__caption,
+        .gallery-item:focus-within .gallery-item__caption {
+            transform: translateY(0);
+        }
+
+        /* Touch devices have no hover — keep captions always visible */
+        @media (hover: none) {
+            .gallery-item__caption {
+                transform: translateY(0);
+            }
+        }
+
+        /* Broken / blocked image fallback */
+        .gallery-item.media-error img {
+            display: none;
+        }
+        .gallery-item.media-error {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 260px;
+            background:
+                repeating-linear-gradient(45deg, var(--color-surface-2) 0 12px, var(--color-surface) 12px 24px);
+            border-style: dashed;
+        }
+        .gallery-item.media-error::after {
+            content: '🖼️  Preview unavailable';
+            font-family: var(--font-headline);
+            font-size: var(--text-xs);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-text-faint);
+        }
+
+        .video-container-gallery {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: var(--color-surface-2);
+        }
+        .video-container-gallery iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .gallery-item--video .gallery-item__caption {
+            position: relative;
+            transform: none;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(6px);
+            text-align: center;
+        }
+        .gallery-item--video:hover .gallery-item__caption {
+            transform: none;
+        }
+
+        /* ========================================
+           COMING SOON NOTICE
+        ======================================== */
+        .coming-soon {
+            text-align: center;
+            margin-top: var(--space-10);
+            padding: var(--space-8) var(--space-6);
+            background: var(--color-surface);
+            border: 1px dashed var(--color-border);
+            border-radius: var(--radius-lg);
+            color: var(--color-text-muted);
+            font-size: var(--text-sm);
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+        .footer {
+            margin-top: var(--space-8);
+            padding: var(--space-12) var(--space-6);
+            border-top: 1px solid var(--color-border);
+            background: var(--color-surface);
+        }
+
+        .footer__content {
+            max-width: var(--content-default);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+        }
+
+        .footer__text {
+            color: var(--color-text-faint);
+            font-size: var(--text-xs);
+            letter-spacing: 0.5px;
+        }
+
+        /* ========================================
+           MOBILE CTA BAR
+        ======================================== */
+        .mobile-cta {
+            position: fixed;
+            left: 12px;
+            right: 12px;
+            bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            gap: var(--space-3);
+            padding: 12px 16px;
+            border-radius: var(--radius-full);
+            background: rgba(20, 20, 22, 0.94);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(140%);
+            transition: transform 0.45s var(--ease-expo);
+        }
+        [data-theme="light"] .mobile-cta {
+            background: rgba(250, 249, 246, 0.96);
+            border-color: rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+        }
+        .mobile-cta.show {
+            transform: none;
+        }
+        .mobile-cta__meta {
+            flex: 1;
+            line-height: 1.25;
+            min-width: 0;
+        }
+        .mobile-cta__meta strong {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--color-text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .mobile-cta__meta span {
+            font-size: 0.72rem;
+            color: var(--color-text-muted);
+        }
+        .mobile-cta__btn {
+            flex-shrink: 0;
+            padding: 10px 18px;
+            border-radius: var(--radius-full);
+            background: var(--color-accent);
+            color: #fff;
+            border: 0;
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background var(--dur-fast), transform var(--dur-fast);
+        }
+        .mobile-cta__btn:hover {
+            background: var(--color-accent-hover);
+            transform: scale(1.04);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-cta {
+                display: flex;
+            }
+            body {
+                padding-bottom: 88px;
+            }
+        }
+
+        /* ========================================
+           TOAST
+        ======================================== */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translate(-50%, 20px);
+            opacity: 0;
+            pointer-events: none;
+            background: rgba(30, 30, 32, 0.95);
+            color: #fff;
+            padding: 12px 22px;
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            font-size: var(--text-sm);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: opacity 0.35s var(--ease-expo), transform 0.35s var(--ease-expo);
+            z-index: 10001;
+            max-width: 90vw;
+            text-align: center;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+        @media (max-width: 768px) {
+            .toast {
+                bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+            }
+        }
+
+        /* ========================================
+           PARTICLE CANVAS
+        ======================================== */
+        #interaction-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9990;
+        }
+        [data-theme="dark"] #interaction-canvas {
+            mix-blend-mode: screen;
+        }
+        [data-theme="light"] #interaction-canvas {
+            mix-blend-mode: multiply;
+            opacity: 0.6;
+        }
+
+        /* ========================================
+           BADGE COLORS
+        ======================================== */
+        .feature-card__badge[data-type="fiction"] {
+            color: var(--color-gold);
+        }
+        .feature-card__badge[data-type="tool"] {
+            color: var(--color-cyan);
+        }
+        .feature-card__badge[data-type="game"] {
+            color: #a3e635;
+        }
+        .feature-card__badge[data-type="analysis"] {
+            color: #818cf8;
+        }
+        .feature-card__badge[data-type="essay"] {
+            color: #f472b6;
+        }
+        .feature-card__badge[data-type="health"] {
+            color: #34d399;
+        }
+        .feature-card__badge[data-type="policy"] {
+            color: #fb923c;
+        }
+        .feature-card__badge[data-type="interactive"] {
+            color: #22d3ee;
+        }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+        @media (max-width: 768px) {
+            :root {
+                --nav-height: 54px;
+                --chapter-height: 44px;
+            }
+            .nav__container {
+                padding: 0 var(--space-4);
+            }
+            .hero {
+                height: 72vh;
+                height: 72svh;
+                min-height: 440px;
+            }
+            .section {
+                padding: var(--space-12) var(--space-4);
+            }
+            .section__header {
+                margin-bottom: var(--space-8);
+            }
+            .feature-grid {
+                gap: var(--space-4);
+            }
+            .gallery-grid {
+                gap: var(--space-4);
+            }
+            .footer__content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .project-tools {
+                margin-bottom: var(--space-8);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav__logo {
+                font-size: 1.05rem;
+            }
+            .feature-card {
+                padding: var(--space-6);
+            }
+            .project-chips {
+                gap: 6px;
+            }
+            .chip {
+                padding: 8px 14px;
+            }
+        }
+
+        /* ========================================
+           SELECTION & SCROLLBAR
+        ======================================== */
+        ::selection {
+            background: rgba(255, 107, 53, 0.28);
+            color: var(--color-text);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-surface-raised);
+            border-radius: var(--radius-full);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent);
+        }
+
+        /* ========================================
+           PRINT STYLES
+        ======================================== */
+        @media print {
+            .nav,
+            .chapter-bar,
+            .scroll-progress,
+            #interaction-canvas,
+            .mobile-cta,
+            .toast,
+            .hero__particles,
+            .hero__scroll-hint {
+                display: none !important;
+            }
+            .hero {
+                height: auto;
+                min-height: 0;
+                margin-top: 0;
+            }
+            .js .js-reveal {
+                opacity: 1 !important;
+                translate: none !important;
+            }
+            .feature-card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            .section {
+                padding: 1rem 0;
+            }
+        }
+
+        /* Visually hidden utility */
+        .sr-only {
+            position: absolute !important;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+                .mobile-cta { display: none !important; }
+    </style>
+
+    <!-- ===================================================================
+         ADVANCED TECHNIQUE CSS — grafted from index_v50.html (v15 + bug fixes)
+         • Ink-wash splash stage
+         • Page-level Three.js starfield + glass cards + transparent sections
+         • Card "deal" animation — SAFE defaults (0/0/0deg/1) so cards sit at
+           rest before JS runs; per-card viewport tracking in JS so cards
+           never freeze mid-deal regardless of grid length.
+         • Mega-menu flyout with grid-template-rows: 0fr -> 1fr accordion
+         • Vertical-rail project timeline + live pulse dot
+           (rail lives on .project-timeline::before; no per-card ::after dot
+           that would be clipped by .feature-card's overflow:hidden)
+         • Sumi-e / sepia light-mode port
+         =================================================================== -->
+    <style>
+        /* ==========================================================
+           LIGHT MODE — Sumi-e / Sepia port (rewrites the existing
+           [data-theme="light"] tokens into warm cream paper + sepia
+           ink so the page reads as a printed archival document
+           instead of "dark mode with inverted grays."
+        ========================================================== */
+        [data-theme="light"] {
+            --color-bg: #f3ecdf;            /* aged cream paper */
+            --color-surface: #fbf8f1;
+            --color-surface-2: #ffffff;
+            --color-surface-raised: #ffffff;
+            --color-surface-hover: #f0e8d8;
+            --color-border: rgba(120, 80, 30, 0.12);
+            --color-border-accent: rgba(176, 82, 30, 0.4);
+            --color-text: #3a2e1e;          /* dark sepia ink */
+            --color-text-muted: #6e573a;
+            --color-text-faint: #a08858;
+            --color-accent: #b0521e;        /* warm rust orange */
+            --color-accent-hover: #904014;
+            --color-accent-glow: rgba(176, 82, 30, 0.20);
+            --color-gold: #8a6a18;
+            --color-gold-bright: #b08820;
+            --color-cyan: #0088a8;
+            --color-copper: #8a5a2a;
+            --shadow-sm: 0 1px 3px rgba(80, 50, 20, 0.10);
+            --shadow-md: 0 4px 16px rgba(80, 50, 20, 0.12);
+            --shadow-lg: 0 12px 40px rgba(80, 50, 20, 0.16);
+            --shadow-card: 0 1px 2px rgba(80, 50, 20, 0.05), 0 12px 32px rgba(80, 50, 20, 0.10);
+        }
+
+        /* Stage base opacity per theme — read by the JS scroll engine */
+        [data-theme="dark"]  .fdr-splash-stage { --stage-base-opacity: 0.72; }
+        [data-theme="light"] .fdr-splash-stage { --stage-base-opacity: 0.92; }
+
+        /* Light mode: warm sepia chain on the splash image + multiply blend */
+        [data-theme="light"] #fdr-bg-layer {
+            filter: sepia(0.50) saturate(0.85) contrast(0.92) brightness(1.18);
+        }
+        [data-theme="light"] #fdr-fg-layer {
+            filter: sepia(0.42) saturate(1.05) contrast(1.00) brightness(1.22);
+        }
+        [data-theme="light"] #fdr-ink-svg {
+            mix-blend-mode: multiply;
+        }
+        [data-theme="light"] #fdr-splash-img {
+            mix-blend-mode: multiply;
+            opacity: 0.92;
+            filter: sepia(0.55) contrast(1.25) brightness(0.90);
+        }
+        [data-theme="light"] #ink-blot-rim {
+            stroke: rgba(72, 42, 18, 0.42) !important;
+        }
+        [data-theme="light"] .fdr-ink-vignette {
+            background: radial-gradient(
+                circle at 50% 45%,
+                rgba(243, 236, 223, 0.15) 0%,
+                rgba(243, 236, 223, 0.70) 100%
+            ) !important;
+        }
+
+        /* Light-mode hero title + section title gradients */
+        [data-theme="light"] .hero__title {
+            background: linear-gradient(135deg, #C04848 0%, #D68A5C 55%, #8a6010 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        [data-theme="light"] .section__title {
+            background: linear-gradient(135deg, #C04848 0%, #D68A5C 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Light-mode sepia chain on gallery images (subtle aged-photo tone) */
+        [data-theme="light"] .gallery-item img {
+            filter: sepia(0.22) saturate(0.95) contrast(1.02) brightness(1.03);
+        }
+
+        /* Light-mode nav + chapter bar: warm translucent cream glass */
+        [data-theme="light"] .nav {
+            background: rgba(243, 236, 223, 0.88);
+            border-bottom: 1px solid rgba(120, 80, 30, 0.12);
+        }
+        [data-theme="light"] .nav.scrolled {
+            background: rgba(243, 236, 223, 0.98);
+            box-shadow: 0 4px 24px rgba(80, 50, 20, 0.10);
+        }
+        [data-theme="light"] .nav__theme-btn:hover {
+            background: rgba(120, 80, 30, 0.06);
+        }
+        [data-theme="light"] .chapter-bar {
+            background: rgba(250, 248, 244, 0.88);
+            border-bottom-color: rgba(120, 80, 30, 0.12);
+        }
+        [data-theme="light"] .chapter-link:hover {
+            background: rgba(120, 80, 30, 0.06);
+        }
+        [data-theme="light"] .nav__menu-toggle:hover {
+            background: rgba(120, 80, 30, 0.06);
+        }
+        [data-theme="light"] .nav-mobile-panel {
+            background: rgba(243, 236, 223, 0.98);
+        }
+        [data-theme="light"] .nav-mobile-panel__link:hover {
+            background: rgba(120, 80, 30, 0.06);
+        }
+
+        /* Light-mode glass cards: white with warm-brown shadow */
+        [data-theme="light"] .feature-card {
+            background: #ffffff;
+            border-color: rgba(120, 80, 30, 0.10);
+        }
+        [data-theme="light"] .feature-card:hover {
+            background: #fbf8f1;
+            box-shadow: 0 2px 4px rgba(80, 50, 20, 0.05), 0 18px 40px rgba(80, 50, 20, 0.14), 0 0 0 1px var(--color-border-accent);
+        }
+        [data-theme="light"] .gallery-item {
+            background: #ffffff;
+            border-color: rgba(120, 80, 30, 0.10);
+        }
+        [data-theme="light"] .gallery-item:hover {
+            box-shadow: 0 12px 40px rgba(80, 50, 20, 0.18);
+            border-color: var(--color-border-accent);
+        }
+
+        [data-theme="light"] .project-search {
+            background: #ffffff;
+            border-color: rgba(120, 80, 30, 0.14);
+        }
+        [data-theme="light"] .project-search:focus-within {
+            background: #ffffff;
+            box-shadow: 0 0 0 4px var(--color-accent-glow);
+        }
+
+        /* Light-mode splash overlay: cream radial instead of black */
+        [data-theme="light"] .hero__overlay {
+            background: radial-gradient(ellipse 80% 70% at 50% 100%, transparent 40%, rgba(243, 236, 223, 0.85) 90%);
+        }
+
+        /* ==========================================================
+           PERMANENT BACKDROP (z-index -3) — sits behind everything
+        ========================================================== */
+        .fdr-dark-backdrop {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -3;
+            background-color: #020208;
+            pointer-events: none;
+        }
+        [data-theme="light"] .fdr-dark-backdrop {
+            background-color: #f3ecdf;
+        }
+
+        /* ==========================================================
+           SVG INK-BLOT REVEAL MASK + EDGE-BLEED FILTER (z-index -2)
+        ========================================================== */
+        #fdr-ink-svg {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* ==========================================================
+           DUAL-LAYER SPLASH STAGE (z-index -2)
+        ========================================================== */
+        .fdr-splash-stage {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+            background-color: transparent;
+            opacity: var(--stage-base-opacity, 0.72);
+            will-change: opacity;
+        }
+        #fdr-bg-layer,
+        #fdr-fg-layer {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform-origin: center center;
+            will-change: transform, filter, opacity;
+        }
+        #fdr-bg-layer {
+            filter: grayscale(0.45) contrast(1.15) brightness(0.65);
+        }
+        #fdr-fg-layer {
+            -webkit-mask-image: radial-gradient(circle at 50% 50%, black 25%, transparent 68%);
+            mask-image: radial-gradient(circle at 50% 50%, black 25%, transparent 68%);
+            filter: contrast(1.12) saturate(1.08);
+        }
+        .fdr-ink-vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                circle at 50% 45%,
+                rgba(15, 15, 18, 0.15) 0%,
+                rgba(15, 15, 18, 0.65) 100%
+            );
+            will-change: opacity;
+        }
+        [data-theme="light"] .fdr-ink-vignette {
+            background: radial-gradient(
+                circle at 50% 45%,
+                rgba(243, 236, 223, 0.15) 0%,
+                rgba(243, 236, 223, 0.70) 100%
+            );
+        }
+
+        /* ==========================================================
+           PAGE-LEVEL STARFIELD BACKDROP (Three.js, z-index -1)
+        ========================================================== */
+        #starfield-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            overflow: hidden;
+            background: transparent;
+            mix-blend-mode: screen;
+        }
+        [data-theme="dark"] #starfield-container { opacity: 1; }
+        [data-theme="light"] #starfield-container { opacity: 0; }
+        #starfield-container canvas {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+            outline: none;
+        }
+
+        /* ==========================================================
+           DARK-MODE STARFIELD SHOW-THROUGH
+        ========================================================== */
+        [data-theme="dark"] body { background-color: transparent; }
+        [data-theme="dark"] .hero,
+        [data-theme="dark"] .section,
+        [data-theme="dark"] .footer { background: transparent; }
+        [data-theme="dark"] .hero__bg { opacity: 0.28; }
+        [data-theme="dark"] .hero__overlay {
+            background: radial-gradient(ellipse 80% 70% at 50% 100%, transparent 40%, rgba(2, 2, 8, 0.88) 90%);
+        }
+        [data-theme="dark"] .chapter-bar {
+            background: rgba(5, 5, 8, 0.66);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom-color: rgba(255, 255, 255, 0.06);
+        }
+
+        /* Glass cards in dark mode — starfield bleeds through subtly */
+        [data-theme="dark"] .feature-card {
+            background: linear-gradient(145deg,
+                rgba(22, 24, 34, 0.72) 0%,
+                rgba(8, 10, 16, 0.78) 100%);
+            backdrop-filter: blur(14px) saturate(140%);
+            -webkit-backdrop-filter: blur(14px) saturate(140%);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+        [data-theme="dark"] .feature-card:hover {
+            background: linear-gradient(145deg,
+                rgba(30, 32, 44, 0.78) 0%,
+                rgba(14, 16, 24, 0.84) 100%);
+        }
+        [data-theme="dark"] .gallery-item {
+            background: linear-gradient(145deg,
+                rgba(22, 24, 34, 0.66) 0%,
+                rgba(8, 10, 16, 0.74) 100%);
+            backdrop-filter: blur(10px) saturate(135%);
+            -webkit-backdrop-filter: blur(10px) saturate(135%);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+        [data-theme="dark"] .project-search {
+            background: rgba(22, 24, 34, 0.66);
+            border-color: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        [data-theme="dark"] .project-search:focus-within {
+            background: rgba(28, 30, 42, 0.78);
+        }
+        [data-theme="dark"] .footer {
+            background: rgba(8, 10, 16, 0.72);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top-color: rgba(255, 255, 255, 0.06);
+        }
+
+        /* ==========================================================
+           CARD "DEAL" ANIMATION — CSS custom properties driven by JS.
+           SAFE DEFAULTS: 0 / 0 / 0deg / 1.
+           Cards sit at rest before the deal JS sets per-card values,
+           and after a card settles the JS resets the vars back to
+           these defaults so hover + layout return to normal.
+
+           The JS uses per-card viewport tracking (each card animates
+           as it enters the viewport) and a SMALL, BOUNDED stagger of
+           (i % 3) * 0.06 — so every card can reach cardProgress = 1
+           regardless of grid length. The rotation is capped at ±4°
+           so cards never rotate sideways or upside-down.
+        ========================================================== */
+        .feature-card {
+            --deal-y: 0px;
+            --deal-x: 0px;
+            --deal-rotate: 0deg;
+            --deal-opacity: 1;
+        }
+        /* While the deal JS is actively driving a card (it sets the
+           .is-dealing class), apply the deal transform + opacity.
+           When the card settles, the JS removes .is-dealing and the
+           card falls back to its native transform/opacity. */
+        .feature-card.is-dealing {
+            transform: translateY(var(--deal-y)) translateX(var(--deal-x)) rotate(var(--deal-rotate));
+            opacity: var(--deal-opacity);
+        }
+        /* Hover is independent — applies once .is-dealing is gone */
+        .feature-card:hover {
+            transform: translateY(-6px);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .feature-card.is-dealing {
+                transform: none !important;
+                opacity: 1 !important;
+            }
+        }
+
+        /* ==========================================================
+           MEGA-MENU FLYOUT (desktop ≥ 1024px) — grid-template-rows
+           0fr -> 1fr accordion for buttery-smooth height reveal
+        ========================================================== */
+        .nav-overlay {
+            position: fixed;
+            top: var(--nav-height);
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.45s var(--ease-expo);
+            z-index: 9997;
+        }
+        body.nav-open .nav-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        [data-theme="light"] .nav-overlay {
+            background: rgba(243, 236, 223, 0.55);
+        }
+
+        .nav__mega {
+            position: fixed;
+            top: var(--nav-height);
+            left: 0;
+            right: 0;
+            z-index: 9997;
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            pointer-events: none;
+            background: rgba(8, 10, 16, 0.78);
+            backdrop-filter: saturate(180%) blur(40px);
+            -webkit-backdrop-filter: saturate(180%) blur(40px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.18);
+            transition: grid-template-rows 0.45s var(--ease-expo),
+                        opacity 0.30s var(--ease-expo);
+            overflow: hidden;
+        }
+        body.nav-open .nav__mega {
+            grid-template-rows: 1fr;
+            opacity: 1;
+            pointer-events: auto;
+        }
+        [data-theme="light"] .nav__mega {
+            background: rgba(243, 236, 223, 0.92);
+            border-bottom-color: rgba(120, 80, 30, 0.12);
+            box-shadow: 0 30px 60px rgba(80, 50, 20, 0.12);
+        }
+        .nav__mega-wrapper {
+            max-width: var(--content-default);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+            min-height: 0;
+            overflow: hidden;
+            width: 100%;
+        }
+        .nav__mega-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-8);
+            padding: var(--space-8) 0 var(--space-10);
+            opacity: 0;
+            transform: translateY(-6px);
+            transition: opacity 0.30s var(--ease-expo), transform 0.30s var(--ease-expo);
+        }
+        body.nav-open .nav__mega-grid {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .mega-col__label {
+            display: block;
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--color-accent);
+            margin-bottom: var(--space-4);
+            opacity: 0.9;
+        }
+        .mega-col__list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            padding: 0;
+            margin: 0;
+        }
+        .mega-link {
+            font-family: var(--font-display);
+            font-size: var(--text-base);
+            font-weight: 700;
+            color: var(--color-text);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+            display: inline-block;
+            transition: color var(--dur-fast), transform var(--dur-fast);
+            padding: 2px 0;
+        }
+        .mega-link:hover {
+            color: var(--color-accent);
+            transform: translateX(4px);
+        }
+        .mega-link__sub {
+            display: block;
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            font-weight: 400;
+            color: var(--color-text-muted);
+            margin-top: 2px;
+            letter-spacing: 0.1px;
+        }
+        .mega-link:hover .mega-link__sub { color: var(--color-text); }
+
+        /* Desktop nav items that trigger the mega-menu */
+        .nav__item { position: relative; }
+        .nav__item[data-dropdown] .nav__link {
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 9px 14px;
+            border-radius: var(--radius-md);
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: color var(--dur-fast), background var(--dur-fast);
+        }
+        .nav__item[data-dropdown] .nav__link::after {
+            content: '▾';
+            font-size: 0.55rem;
+            opacity: 0.5;
+            transition: transform var(--dur-fast) var(--ease-expo);
+            margin-left: 4px;
+        }
+        .nav__item[data-dropdown]:hover .nav__link::after { transform: rotate(180deg); }
+        .nav__item[data-dropdown]:hover .nav__link {
+            color: var(--color-text);
+            background: rgba(255, 255, 255, 0.06);
+        }
+        [data-theme="light"] .nav__item[data-dropdown]:hover .nav__link {
+            background: rgba(120, 80, 30, 0.06);
+        }
+        .nav__items-desktop {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        body.nav-open .nav__items-desktop:hover .nav__item[data-dropdown]:not(:hover) .nav__link {
+            opacity: 0.6;
+        }
+        @media (max-width: 1024px) {
+            .nav__items-desktop { display: none; }
+            .nav-overlay, .nav__mega { display: none !important; }
+        }
+
+        /* ==========================================================
+           VERTICAL-RAIL PROJECT TIMELINE + LIVE PULSE DOT
+           The rail lives on .project-timeline::before (one continuous
+           element), so it never gets clipped by per-card overflow.
+           No per-card ::after dot — keeps .feature-card's overflow:
+           hidden intact for the top accent stripe.
+        ========================================================== */
+        .project-timeline {
+            position: relative;
+            padding-left: 28px;
+        }
+        .project-timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 12px;
+            bottom: 12px;
+            width: 1px;
+            background: linear-gradient(180deg,
+                transparent 0%,
+                var(--color-accent) 6%,
+                var(--color-gold) 94%,
+                transparent 100%);
+            pointer-events: none;
+            opacity: 0.45;
+        }
+        @media (max-width: 768px) {
+            .project-timeline { padding-left: 18px; }
+            .project-timeline::before { left: 4px; }
+        }
+
+        .live-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            box-shadow: 0 0 0 0 var(--color-accent-glow);
+            animation: live-pulse 1.8s ease-out infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        @keyframes live-pulse {
+            0%   { box-shadow: 0 0 0 0 var(--color-accent-glow); }
+            70%  { box-shadow: 0 0 0 10px rgba(255, 107, 53, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
+        }
+
+        /* Mobile mega-menu accordion (inside the existing mobile panel) */
+        .mnav-acc {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        [data-theme="light"] .mnav-acc {
+            border-bottom-color: rgba(120, 80, 30, 0.10);
+        }
+        .mnav-acc__head {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 4px;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: left;
+            transition: color var(--dur-fast);
+        }
+        .mnav-acc__head:hover { color: var(--color-accent); }
+        .mnav-acc__chevron {
+            font-size: 0.7rem;
+            opacity: 0.5;
+            transition: transform 0.28s var(--ease-expo);
+            margin-left: 12px;
+            flex-shrink: 0;
+        }
+        .mnav-acc[data-open="true"] .mnav-acc__chevron { transform: rotate(180deg); }
+        .mnav-acc__body {
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            overflow: hidden;
+            transition: grid-template-rows 0.35s var(--ease-expo),
+                        opacity 0.25s var(--ease-expo);
+        }
+        .mnav-acc[data-open="true"] .mnav-acc__body {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+        .mnav-acc__body > div { min-height: 0; overflow: hidden; }
+        .mnav-acc__list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 4px 0 14px;
+            margin: 0;
+        }
+        .mnav-acc__link {
+            display: block;
+            padding: 10px 14px;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-text);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            transition: color var(--dur-fast), background var(--dur-fast), transform var(--dur-fast);
+        }
+        .mnav-acc__link:hover {
+            color: var(--color-accent);
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateX(4px);
+        }
+        [data-theme="light"] .mnav-acc__link:hover {
+            background: rgba(120, 80, 30, 0.05);
+        }
+        .mnav-acc__sub {
+            display: block;
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            font-weight: 400;
+            color: var(--color-text-muted);
+            margin-top: 2px;
+        }
+
+        .section__eyebrow--live {
+            display: inline-flex;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===================================================================
+         PERMANENT BACKDROP + INK-WASH SPLASH STAGE + STARFIELD
+         (grafted from index_v50.html — all fixed-position, z-index -3/-2/-1,
+         pointer-events:none, so they sit behind every visible section)
+    ==================================================================== -->
+
+    <!-- Permanent backdrop at z-index:-3 (#020208 in dark mode, #f3ecdf cream paper in light mode) -->
+    <div class="fdr-dark-backdrop" aria-hidden="true"></div>
+
+    <!-- SVG ink-blot reveal mask + edge-bleed filter (fixed, full-viewport) -->
+    <svg id="fdr-ink-svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1920 1080">
+      <defs>
+        <filter id="ink-bleed-edge" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence id="ink-turbulence" type="fractalNoise"
+                        baseFrequency="0.025" numOctaves="5" seed="7" result="noise" />
+          <feDisplacementMap id="ink-bleed-scale"
+                             in="SourceGraphic" in2="noise" scale="140"
+                             xChannelSelector="R" yChannelSelector="G" />
+          <feGaussianBlur stdDeviation="3" />
+        </filter>
+
+        <mask id="ink-reveal-mask">
+          <rect width="1920" height="1080" fill="black" />
+          <circle id="ink-blot-circle" cx="960" cy="540" r="420" fill="white" filter="url(#ink-bleed-edge)" />
+        </mask>
+      </defs>
+
+      <image id="fdr-splash-img" href="http://fdrworld.com/aBbgUDm.jpeg" width="1920" height="1080" preserveAspectRatio="xMidYMid slice" mask="url(#ink-reveal-mask)" />
+      <circle id="ink-blot-rim" cx="960" cy="540" r="420" fill="none" stroke="rgba(255, 168, 96, 0.30)" stroke-width="10" filter="url(#ink-bleed-edge)" />
+    </svg>
+
+    <!-- Fixed Full-Viewport Splash Stage (dual-layer 2.5D parallax) -->
+    <div class="fdr-splash-stage" aria-hidden="true">
+      <img id="fdr-bg-layer" src="http://fdrworld.com/aBbgUDm.jpeg" alt="" />
+      <img id="fdr-fg-layer" src="http://fdrworld.com/aBbgUDm.jpeg" alt="" />
+      <div class="fdr-ink-vignette"></div>
+    </div>
+
+    <!-- Page-level Three.js starfield (dark mode only; opacity 0 in light mode) -->
+    <div id="starfield-container" aria-hidden="true"></div>
+
+    <div class="scroll-progress" id="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
+
+    <!-- Skip link -->
+    <a href="#main-content" class="sr-only">Skip to content</a>
+
+    <!-- Navigation — categorized mega-menu (desktop) + accordion (mobile) -->
+    <nav class="nav" role="navigation" aria-label="Main Navigation">
+        <div class="nav__container">
+            <a href="http://www.fdrworld.com" class="nav__logo" aria-label="FDR World Home">
+                🧊 FDR WORLD
+            </a>
+
+            <!-- Desktop mega-menu items -->
+            <ul class="nav__items-desktop">
+                <li class="nav__item" data-dropdown="games">
+                    <a href="#expertise" class="nav__link" aria-haspopup="true" aria-expanded="false">🎮 Games &amp; Interactive</a>
+                </li>
+                <li class="nav__item" data-dropdown="fiction">
+                    <a href="#expertise" class="nav__link" aria-haspopup="true" aria-expanded="false">📖 Fiction &amp; Essays</a>
+                </li>
+                <li class="nav__item" data-dropdown="tools">
+                    <a href="#expertise" class="nav__link" aria-haspopup="true" aria-expanded="false">⚙️ Tools &amp; Analysis</a>
+                </li>
+                <li class="nav__item" data-dropdown="policy">
+                    <a href="#expertise" class="nav__link" aria-haspopup="true" aria-expanded="false">🏛️ Policy &amp; Health</a>
+                </li>
+                <li class="nav__item">
+                    <a href="#gallery" class="nav__link">🖼️ Gallery</a>
+                </li>
+            </ul>
+
+            <div class="nav__actions">
+                <button class="nav__theme-btn" id="theme-toggle" type="button" aria-label="Switch to light mode" title="Toggle theme">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                </button>
+                <a href="http://www.fdrworld.com" class="nav__link--primary" aria-label="Back to FDR World main site">
+                    <span aria-hidden="true">←</span> <span>Back to Main Site</span>
+                </a>
+                <button class="nav__menu-toggle" id="navMenuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMobilePanel">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <line x1="3" y1="12" x2="21" y2="12" />
+                        <line x1="3" y1="18" x2="21" y2="18" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mega-menu overlay + flyout (desktop only) -->
+    <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+    <div class="nav__mega" id="navMega" aria-hidden="true" role="menu">
+        <div class="nav__mega-wrapper">
+            <div class="nav__mega-grid">
+                <div class="mega-col">
+                    <span class="mega-col__label">🎮 Games &amp; Interactive</span>
+                    <ul class="mega-col__list">
+                        <li><a href="http://www.fdrworld.com/projects/fdrgame.html" class="mega-link" target="_blank" rel="noopener noreferrer">FDR World v0.02<span class="mega-link__sub">Monster Collector RPG</span></a></li>
+                        <li><a href="https://fdrworld.neocities.org/baduk" class="mega-link" target="_blank" rel="noopener noreferrer">Baduk Chronicles<span class="mega-link__sub">RTS &amp; Go Hybrid</span></a></li>
+                        <li><a href="http://www.fdrworld.com/projects/spacegame.html" class="mega-link" target="_blank" rel="noopener noreferrer">Endless Frontier<span class="mega-link__sub">4X Strategy</span></a></li>
+                        <li><a href="http://www.fdrworld.com/game5/game86.html" class="mega-link" target="_blank" rel="noopener noreferrer">March of the 10,000<span class="mega-link__sub">Action Shooter</span></a></li>
+                    </ul>
+                </div>
+                <div class="mega-col">
+                    <span class="mega-col__label">⚙️ Interactive Tools</span>
+                    <ul class="mega-col__list">
+                        <li><a href="http://fdrworld.com/projects/fdr_memorycube.html" class="mega-link" target="_blank" rel="noopener noreferrer">Infinite Memory Cube<span class="mega-link__sub">3D Artifact</span></a></li>
+                        <li><a href="https://fdrworld.neocities.org/beach" class="mega-link" target="_blank" rel="noopener noreferrer">Infinite Beach<span class="mega-link__sub">WebGPU + FFT Ocean</span></a></li>
+                        <li><a href="http://www.fdrworld.com/talk.html" class="mega-link" target="_blank" rel="noopener noreferrer">The Titans Series<span class="mega-link__sub">Conversation Engine · Vol. I</span></a></li>
+                    </ul>
+                </div>
+                <div class="mega-col">
+                    <span class="mega-col__label">📖 Fiction &amp; Essays</span>
+                    <ul class="mega-col__list">
+                        <li><a href="http://www.fdrworld.com/projects/stars.html" class="mega-link" target="_blank" rel="noopener noreferrer">Swords, Sorcery &amp; Starlight<span class="mega-link__sub">Sci-Fi Anthology</span></a></li>
+                        <li><a href="http://www.fdrworld.com/projects/vol1shields.html" class="mega-link" target="_blank" rel="noopener noreferrer">Shields and the Rain<span class="mega-link__sub">Wesnoth Anthology Vol. I</span></a></li>
+                        <li><a href="http://www.fdrworld.com/projects/mouser.html" class="mega-link" target="_blank" rel="noopener noreferrer">Lankhmar in Twilight<span class="mega-link__sub">Sword &amp; Sorcery</span></a></li>
+                        <li><a href="http://www.fdrworld.com/projects/morewater.html" class="mega-link" target="_blank" rel="noopener noreferrer">Carry More Water<span class="mega-link__sub">Naev Novel</span></a></li>
+                    </ul>
+                </div>
+                <div class="mega-col">
+                    <span class="mega-col__label">🏛️ Policy &amp; Analysis</span>
+                    <ul class="mega-col__list">
+                        <li><a href="http://www.fdrworld.com/projects/highschoolreform.html" class="mega-link" target="_blank" rel="noopener noreferrer">Reimagining Adolescence<span class="mega-link__sub">Education Reform</span></a></li>
+                        <li><a href="http://www.fdrworld.com/projects/budget.html" class="mega-link" target="_blank" rel="noopener noreferrer">Fiscal Sustainability<span class="mega-link__sub">Budget Blueprint</span></a></li>
+                        <li><a href="https://fdrworld.neocities.org/confrontcomplexity" class="mega-link" target="_blank" rel="noopener noreferrer">Confronting Complexity<span class="mega-link__sub">AGI Cockpit</span></a></li>
+                        <li><a href="http://www.fdrworld.com/projects/socialcapital.html" class="mega-link" target="_blank" rel="noopener noreferrer">Beyond GDP<span class="mega-link__sub">Social Capital</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile slide-in panel — categorized accordion -->
+    <div class="nav-mobile-panel" id="navMobilePanel" aria-hidden="true">
+        <button class="nav-mobile-panel__close" id="navMobileClose" type="button" aria-label="Close menu">✕</button>
+
+        <div class="mnav-acc" data-open="false">
+            <button class="mnav-acc__head" aria-expanded="false" aria-controls="mnav-games">
+                <span>🎮 Games &amp; Interactive</span>
+                <span class="mnav-acc__chevron">▾</span>
+            </button>
+            <div class="mnav-acc__body" id="mnav-games" role="region">
+                <div>
+                    <ul class="mnav-acc__list">
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/fdrgame.html" target="_blank" rel="noopener noreferrer">FDR World v0.02<span class="mnav-acc__sub">Monster Collector RPG</span></a></li>
+                        <li><a class="mnav-acc__link" href="https://fdrworld.neocities.org/baduk" target="_blank" rel="noopener noreferrer">Baduk Chronicles<span class="mnav-acc__sub">RTS &amp; Go Hybrid</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/spacegame.html" target="_blank" rel="noopener noreferrer">Endless Frontier<span class="mnav-acc__sub">4X Strategy</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/game5/game86.html" target="_blank" rel="noopener noreferrer">March of the 10,000<span class="mnav-acc__sub">Action Shooter</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://fdrworld.com/projects/fdr_memorycube.html" target="_blank" rel="noopener noreferrer">Infinite Memory Cube<span class="mnav-acc__sub">3D Artifact</span></a></li>
+                        <li><a class="mnav-acc__link" href="https://fdrworld.neocities.org/beach" target="_blank" rel="noopener noreferrer">Infinite Beach<span class="mnav-acc__sub">WebGPU Ocean</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mnav-acc" data-open="false">
+            <button class="mnav-acc__head" aria-expanded="false" aria-controls="mnav-fiction">
+                <span>📖 Fiction &amp; Essays</span>
+                <span class="mnav-acc__chevron">▾</span>
+            </button>
+            <div class="mnav-acc__body" id="mnav-fiction" role="region">
+                <div>
+                    <ul class="mnav-acc__list">
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/stars.html" target="_blank" rel="noopener noreferrer">Swords, Sorcery &amp; Starlight<span class="mnav-acc__sub">Anthology</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/vol1shields.html" target="_blank" rel="noopener noreferrer">Shields and the Rain<span class="mnav-acc__sub">Wesnoth Anthology</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/mouser.html" target="_blank" rel="noopener noreferrer">Lankhmar in Twilight<span class="mnav-acc__sub">Sword &amp; Sorcery</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/morewater.html" target="_blank" rel="noopener noreferrer">Carry More Water<span class="mnav-acc__sub">Naev Novel</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/fdrnovel.html" target="_blank" rel="noopener noreferrer">The Ramp<span class="mnav-acc__sub">Cube Conspiracy Novel</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/ultron.html" target="_blank" rel="noopener noreferrer">Age of Ultron Review<span class="mnav-acc__sub">Essay · Film &amp; AI</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mnav-acc" data-open="false">
+            <button class="mnav-acc__head" aria-expanded="false" aria-controls="mnav-tools">
+                <span>⚙️ Tools &amp; Analysis</span>
+                <span class="mnav-acc__chevron">▾</span>
+            </button>
+            <div class="mnav-acc__body" id="mnav-tools" role="region">
+                <div>
+                    <ul class="mnav-acc__list">
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/gpubiology.html" target="_blank" rel="noopener noreferrer">GPU Programming for Biologists<span class="mnav-acc__sub">Practitioner's Guide</span></a></li>
+                        <li><a class="mnav-acc__link" href="https://fdrworld.neocities.org/cardiosense" target="_blank" rel="noopener noreferrer">CardioSense<span class="mnav-acc__sub">On-device biometrics</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/tala.html" target="_blank" rel="noopener noreferrer">TALA<span class="mnav-acc__sub">Village Utility Device</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/shaver.html" target="_blank" rel="noopener noreferrer">VELRA<span class="mnav-acc__sub">Precision Rotary Shaver</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/talk.html" target="_blank" rel="noopener noreferrer">The Titans Series<span class="mnav-acc__sub">Conversation Engine</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/proj1/dffactorio1.html" target="_blank" rel="noopener noreferrer">Engines of Infinity<span class="mnav-acc__sub">Factorio &amp; Dwarf Fortress</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/proj1/phanzelda2.html" target="_blank" rel="noopener noreferrer">Zelda &amp; Phantasia<span class="mnav-acc__sub">Retro Engineering</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/proj1/archi_education1.html" target="_blank" rel="noopener noreferrer">The Adolescent Arena<span class="mnav-acc__sub">Architecture Analysis</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mnav-acc" data-open="false">
+            <button class="mnav-acc__head" aria-expanded="false" aria-controls="mnav-policy">
+                <span>🏛️ Policy &amp; Health</span>
+                <span class="mnav-acc__chevron">▾</span>
+            </button>
+            <div class="mnav-acc__body" id="mnav-policy" role="region">
+                <div>
+                    <ul class="mnav-acc__list">
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/highschoolreform.html" target="_blank" rel="noopener noreferrer">Reimagining Adolescence<span class="mnav-acc__sub">Education Reform</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/budget.html" target="_blank" rel="noopener noreferrer">Fiscal Sustainability<span class="mnav-acc__sub">Budget Blueprint</span></a></li>
+                        <li><a class="mnav-acc__link" href="https://fdrworld.neocities.org/confrontcomplexity" target="_blank" rel="noopener noreferrer">Confronting Complexity<span class="mnav-acc__sub">AGI Cockpit</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/socialcapital.html" target="_blank" rel="noopener noreferrer">Beyond GDP<span class="mnav-acc__sub">Social Capital</span></a></li>
+                        <li><a class="mnav-acc__link" href="http://www.fdrworld.com/projects/healthy.html" target="_blank" rel="noopener noreferrer">MAHA<span class="mnav-acc__sub">Health Framework</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <ul class="nav-mobile-panel__links">
+            <li><a href="#gallery" class="nav-mobile-panel__link">🖼️ Gallery</a></li>
+            <li><a href="http://www.fdrworld.com" class="nav-mobile-panel__link nav-mobile-panel__link--cta">← Back to Main Site</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero" aria-label="Page header">
+        <div class="hero__bg" aria-hidden="true"></div>
+        <div class="hero__grid-overlay" aria-hidden="true"></div>
+        <div class="hero__overlay" aria-hidden="true"></div>
+        <div class="hero__particles" aria-hidden="true">
+            <div class="hero__particle" style="left:8%;  --pdur:22s; --pdelay:0s;"></div>
+            <div class="hero__particle" style="left:24%; --pdur:18s; --pdelay:3s;"></div>
+            <div class="hero__particle" style="left:50%; --pdur:26s; --pdelay:7s;"></div>
+            <div class="hero__particle" style="left:72%; --pdur:20s; --pdelay:2s;"></div>
+            <div class="hero__particle" style="left:90%; --pdur:16s; --pdelay:5s;"></div>
+        </div>
+
+        <div class="hero__content">
+            <p class="hero__eyebrow">FDR World Collection</p>
+            <span class="hero__icon emoji-pulse" aria-hidden="true">🧊</span>
+            <h1 class="hero__title">Extended Projects</h1>
+            <p class="hero__subtitle">
+                Creative works, tools, and explorations from the FDR World team — fiction, apps, games, and analysis.
+            </p>
+        </div>
+
+        <div class="hero__scroll-hint" aria-hidden="true">
+            <div class="hero__scroll-icon"></div>
+            <span>Scroll</span>
+        </div>
+    </header>
+
+    <!-- Sticky chapter bar with scroll-spy -->
+    <nav class="chapter-bar" id="chapterBar" aria-label="In-page navigation">
+        <div class="chapter-bar__inner">
+            <a href="#expertise" class="chapter-link">Projects</a>
+            <a href="#gallery" class="chapter-link">Gallery</a>
+        </div>
+    </nav>
+
+    <!-- Projects Section -->
+    <main id="main-content">
+        <section class="section" id="expertise" aria-labelledby="projects-title">
+            <div class="section__header js-reveal">
+                <span class="section__icon emoji-pulse" aria-hidden="true">🔬</span>
+                <span class="section__eyebrow section__eyebrow--live"><span class="live-dot" aria-hidden="true"></span>Portfolio</span>
+                <h2 class="section__title" id="projects-title">Past Projects &amp; Expertise</h2>
+                <p class="section__subtitle">
+                    A mix of fiction, tools, games, and deep-dives from across our creative and technical work.
+                </p>
+            </div>
+
+            <!-- Search + category chips -->
+            <div class="project-tools">
+                <div class="project-search">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    <input id="projectSearch" type="search" placeholder='Search projects — try "game" or "policy"…'
+                           aria-label="Search projects" autocomplete="off" autocapitalize="off"
+                           autocorrect="off" spellcheck="false" enterkeyhint="search" />
+                </div>
+                <div class="project-chips" role="group" aria-label="Filter projects by category">
+                    <button class="chip is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+                    <button class="chip" type="button" data-filter="game" aria-pressed="false">Games</button>
+                    <button class="chip" type="button" data-filter="analysis" aria-pressed="false">Analysis</button>
+                    <button class="chip" type="button" data-filter="policy" aria-pressed="false">Policy</button>
+                    <button class="chip" type="button" data-filter="fiction" aria-pressed="false">Fiction</button>
+                    <button class="chip" type="button" data-filter="tool" aria-pressed="false">Tools</button>
+                    <button class="chip" type="button" data-filter="essay" aria-pressed="false">Essays</button>
+                    <button class="chip" type="button" data-filter="health" aria-pressed="false">Health</button>
+                </div>
+                <p class="project-count" id="projectCount" aria-live="polite">Projects</p>
+            </div>
+
+            <!-- Project timeline — wraps the grid in a continuous vertical rail -->
+            <div class="project-timeline">
+            <div class="feature-grid" role="list" id="projectGrid">
+
+                <!-- High School Reform Proposal -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="policy analysis">
+                    <span class="feature-card__icon" aria-hidden="true">🏫</span>
+                    <span class="feature-card__badge" data-type="analysis">Education · Policy Reform</span>
+                    <h3 class="feature-card__title">Reimagining Adolescence</h3>
+                    <p class="feature-card__description">
+                        A comprehensive high school reform for the 21st century — extending the arc of adolescence to 8 years, transforming the cafeteria into a communal ritual, and pairing every student with a dedicated mentor who stays with them through graduation and two years beyond. A practical, evidence‑based blueprint for schools that prioritize belonging, dignity, and community.
+                    </p>
+                    <a href="http://www.fdrworld.com/projects/highschoolreform.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Read the High School Reform Proposal">
+                        View Proposal <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Fiscal Sustainability Proposal -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="policy">
+                    <span class="feature-card__icon" aria-hidden="true">🏛️</span>
+                    <span class="feature-card__badge" data-type="policy">Policy · Economic Reform</span>
+                    <h3 class="feature-card__title">Reimagining Fiscal Sustainability</h3>
+                    <p class="feature-card__description">
+                        A comprehensive national blueprint to balance the federal budget and address the $40 trillion debt. Fuses healthcare cost control, climate resilience, entitlement modernization, and strategic trade policy into a dual 8‑year stabilization and 15‑year structural reform plan—proving that fiscal discipline and human dignity are not mutually exclusive.
+                    </p>
+                    <a href="http://www.fdrworld.com/projects/budget.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Read the Fiscal Sustainability Proposal">
+                        View Proposal <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- AGI Fiscal Complexity Cockpit -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="tool analysis">
+                    <span class="feature-card__icon" aria-hidden="true">🧠</span>
+                    <span class="feature-card__badge" data-type="tool">Analysis · Systems Design</span>
+                    <h3 class="feature-card__title">Confronting Complexity</h3>
+                    <p class="feature-card__description">
+                        An interactive AGI decision cockpit designed to tame the unwieldy scale of the federal budget. Users can drag-and-drop policy levers, run multi-model simulations, stress-test against macroeconomic shocks, and audit hidden interdependencies in real time. A practical tool for visualizing complex adaptive systems and turning political noise into informed deliberation.
+                    </p>
+                    <a href="https://fdrworld.neocities.org/confrontcomplexity" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Explore the AGI Fiscal Complexity Cockpit">
+                        Launch Cockpit <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Social Capital Proposal -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="policy analysis">
+                    <span class="feature-card__icon" aria-hidden="true">⚖️</span>
+                    <span class="feature-card__badge" data-type="analysis">Policy · Economic Reform</span>
+                    <h3 class="feature-card__title">Beyond GDP: Social Capital System</h3>
+                    <p class="feature-card__description">
+                        A practical framework for American youth to earn social capital credits through verified community service. Credits convert to tuition, vocational training, and emergency support — redefining value beyond GDP and rewarding contribution over consumption.
+                    </p>
+                    <a href="http://www.fdrworld.com/projects/socialcapital.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Read the Social Capital Proposal">
+                        View Proposal <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+
+                        <!-- MAHA — Make America Healthy Again -->
+                        <article class="feature-card js-reveal" role="listitem" data-cat="health policy">
+                                <span class="feature-card__icon" aria-hidden="true">🥗</span>
+                                <span class="feature-card__badge" data-type="health">Health · Tier-Based Framework</span>
+                                <h3 class="feature-card__title">MAHA — Make America Healthy Again</h3>
+                                <p class="feature-card__description">
+                                        A tier-based, evidence-anchored, zero-friction health framework for three groups who need it most: the overweight and overworked, the senior facing sarcopenia, and the average person drifting toward metabolic syndrome. Rather than prescribing a destination, MAHA prescribes a path — one cup of coffee, one peach, one minute of standing, sequenced over three years so the plan survives contact with a real life. Built on six independent scoring passes over the peer-reviewed literature and weighted 30/30/20/20 toward inflammation, digestion, convience, and circulation, the document ranks every food and habit by whether the evidence is strong <em>and</em> whether a real person can actually stick to it. Food tiers, synergy pairs, fasting protocols, grocery lists, cost analysis, drug-nutrient interactions, and honest caveats throughout. Not a supplement pitch. Not a fad. 
+                                </p>
+                                <a href="http://www.fdrworld.com/projects/healthy.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Read MAHA — Make America Healthy Again">
+                                        Read the Framework <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                        </article>
+
+
+                <!-- The Adolescent Arena -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="analysis">
+                    <span class="feature-card__icon" aria-hidden="true">📖</span>
+                    <span class="feature-card__badge" data-type="analysis">Analysis · Architecture</span>
+                    <h3 class="feature-card__title">The Adolescent Arena</h3>
+                    <p class="feature-card__description">
+                        A deep-dive architectural analysis into the spatial psychology of secondary education. This study investigates how the "arena" of high school design—from circulation flow to environmental aesthetics—acts as a silent catalyst for adolescent development.
+                    </p>
+                    <a href="http://www.fdrworld.com/proj1/archi_education1.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="View The Adolescent Arena">
+                        View Book <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- FDR World v0.02 -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="game">
+                    <span class="feature-card__icon" aria-hidden="true">🎮</span>
+                    <span class="feature-card__badge" data-type="game">Game · Monster Collector</span>
+                    <h3 class="feature-card__title">FDR World v0.02</h3>
+                    <p class="feature-card__description">
+                        A retro-inspired monster-collection RPG built on a custom JavaScript engine. Journey through sprawling stages—from neon-lit cities to procedural abyssal groves—mastering deep turn-based combat, type matchups, and party building packed into a nostalgic, handset-style ASCII aesthetic.
+                    </p>
+                    <a href="http://www.fdrworld.com/projects/fdrgame.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Play FDR World v0.02">
+                        Play Game <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Baduk Chronicles: Pylon Wars -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="game">
+                    <span class="feature-card__icon" aria-hidden="true">⚔️</span>
+                    <span class="feature-card__badge" data-type="game">Game · RTS &amp; Go Hybrid</span>
+                    <h3 class="feature-card__title">Baduk Chronicles: Pylon Wars</h3>
+                    <p class="feature-card__description">
+                        A seamless fusion of real-time strategy and the ancient game of Go. Build your base, mine resources, train an army, and fight for control of the pylon board – every stone you place follows real Go rules: liberties, captures, ko, and territory. Risk aggressive forward placements to disrupt your opponent's supply lines, or build impenetrable defenses in a high-stakes clash where modern RTS macro-management meets timeless tactical depth.
+                    </p>
+                    <a href="https://fdrworld.neocities.org/baduk" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Play Baduk Chronicles: Pylon Wars">
+                        Play Game <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Healthcare App -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="health tool">
+                    <span class="feature-card__icon" aria-hidden="true">🩺</span>
+                    <span class="feature-card__badge" data-type="health">App · Health &amp; Biometrics</span>
+                    <h3 class="feature-card__title">CardioSense</h3>
+                    <p class="feature-card__description">
+                        Most trackers force you to wait minutes for vague scores, streaming your private data to clouds you can't control. CardioSense is different. It's an elite computational laboratory that lives entirely on your device. By running proprietary cellular-mechanics models, CardioSense converts your phone's camera into a high-fidelity cardiovascular scanner. We move beyond basic heart rate tracking to deliver deep, frame-by-frame analysis of your vascular hemodynamics—quantifying pulse morphology and sub-harmonic variance to decode unmatched insights into your nervous system resilience. We don't just flag physiological stress; we diagnose its origin. Because all processing happens locally within your browser, your private data never touches the cloud. You get clinical-grade physiological clarity and actionable recovery intelligence for half the cost of other trackers. CardioSense is the honest, transparent telemetry tool for high-performance professionals. Stop guessing and start optimizing your biological edge.
+                    </p>
+                    <a href="https://fdrworld.neocities.org/cardiosense" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="View the CardioSense app">
+                        View App <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Age of Ultron Review -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="essay analysis">
+                    <span class="feature-card__icon" aria-hidden="true">🤖</span>
+                    <span class="feature-card__badge" data-type="essay">Essay · Film &amp; AI</span>
+                    <h3 class="feature-card__title">Age of Ultron Review</h3>
+                    <p class="feature-card__description">
+                        An essay treating <em>Avengers: Age of Ultron</em> as an early AGI parable. Ultron and Vision are read as two futures for synthetic minds — one domination-oriented, one relational — with the film framing today's alignment and governance concerns with surprising prescience.
+                    </p>
+                    <a href="http://www.fdrworld.com/projects/ultron.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Read the Age of Ultron essay">
+                        Read Essay <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- The Infinite Memory Cube -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="interactive tool">
+                    <span class="feature-card__icon emoji-pulse" aria-hidden="true">🧊</span>
+                    <span class="feature-card__badge" data-type="interactive">Interactive · 3D Artifact</span>
+                    <h3 class="feature-card__title">The Infinite Memory Cube</h3>
+                    <p class="feature-card__description">
+                        A living crystalline artifact that is both impossibly small and infinitely vast, adrift at Coordinates 7.112054.6.923441.1.876322. Within its bounds it houses an infinite lattice of ever-smaller cubes, each nesting deeper into itself. Rotate it, explore its depths, and release the souls bound within. Built with HTML, WebGL, and JavaScript, this interactive scene renders the fractal Cube, free-floating soul streams, and breathing fresnel-shell visuals.
+                    </p>
+                    <a href="http://fdrworld.com/projects/fdr_memorycube.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Explore the Infinite Memory Cube">
+                        Explore the Cube <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Engines of Infinity -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="analysis">
+                    <span class="feature-card__icon" aria-hidden="true">⚙️</span>
+                    <span class="feature-card__badge" data-type="analysis">Analysis · Systems Design</span>
+                    <h3 class="feature-card__title">Engines of Infinity</h3>
+                    <p class="feature-card__description">
+                        A technical dissection of <em>Factorio</em> and <em>Dwarf Fortress</em> — treating logistics optimization, computational complexity, and emergent player economies as high-stakes engineering problems in disguise.
+                    </p>
+                    <a href="http://www.fdrworld.com/proj1/dffactorio1.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Read Engines of Infinity analysis">
+                        View Article <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Zelda and Phantasia -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="analysis">
+                    <span class="feature-card__icon" aria-hidden="true">🛡️</span>
+                    <span class="feature-card__badge" data-type="analysis">Analysis · Retro Engineering</span>
+                    <h3 class="feature-card__title">Zelda &amp; Phantasia</h3>
+                    <p class="feature-card__description">
+                        A reverse-engineering deep-dive into <em>A Link to the Past</em> and <em>Tales of Phantasia</em> — memory management tricks, sprite-rendering hacks, and the assembly-level ingenuity that packed complex RPG mechanics into SNES hardware limits.
+                    </p>
+                    <a href="http://www.fdrworld.com/proj1/phanzelda2.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Read the Zelda and Phantasia analysis">
+                        View Article <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Swords, Sorcery, and Starlight -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="fiction">
+                    <span class="feature-card__icon" aria-hidden="true">⚔️</span>
+                    <span class="feature-card__badge" data-type="fiction">Anthology · Sci-Fi &amp; Fantasy</span>
+                    <h3 class="feature-card__title">Swords, Sorcery, and Starlight</h3>
+                    <p class="feature-card__description">
+                        Eight original tales set in the universes of <em>Endless Sky</em>, <em>Naev</em>, and <em>Flare: Empyrean Campaign</em> — a cartographer chasing her mother's ghost, an auditor weighing what her signature protects, a deserter trading his name for the truth. Eight stories, one question: what do we owe the things we uncover?
+                    </p>
+                    <a href="http://www.fdrworld.com/projects/stars.html" class="feature-card__link" aria-label="Read Swords, Sorcery, and Starlight — A Sci-Fi and Fantasy Anthology">
+                        Read Anthology <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Grey Mouser -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="fiction">
+                    <span class="feature-card__icon" aria-hidden="true">🗡️</span>
+                    <span class="feature-card__badge" data-type="fiction">Fiction · Sword &amp; Sorcery</span>
+                    <h3 class="feature-card__title">Lankhmar in Twilight</h3>
+                    <p class="feature-card__description">
+                        A gritty tribute to Fafhrd and the Gray Mouser — cynical rogue-wit meets cinematic noir, set against the decadent backdrop of Lankhmar.
+                    </p>
+                    <a href="http://www.fdrworld.com/projects/mouser.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Read the Grey Mouser Story">
+                        View Story <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Shields and the Rain — Vol. I of the Shields Saga -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="fiction">
+                    <span class="feature-card__icon" aria-hidden="true">🛡️</span>
+                    <span class="feature-card__badge" data-type="fiction">Anthology · Fantasy · Vol. I</span>
+                    <h3 class="feature-card__title">Shields and the Rain</h3>
+                    <p class="feature-card__description">
+                        Five original tales of Kaelen and Lyra — mercenaries in the world of Wesnoth with a shield that bears no heraldry and a bow that has outlived its country. A ledger that hides a death list. A ward renewed by dying. A offspring who belongs to no one. A map that changes nothing. A home they refuse to return to. Set in the open-source universe of <em>The Battle for Wesnoth</em>, these stories ask what the work costs when the institutions that should do it have failed. Five jobs. Five patrons who pay too well. Five truths that cost more than the money. Volume I of the Shields Saga. Volume II, <em>Shields against Fire Magic</em>, returns to Kaelen and Lyra. Work in progress.
+                    </p>
+                    <a href="http://www.fdrworld.com/projects/vol1shields.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Read Shields and the Rain — Volume I of the Shields Saga">
+                        Read Volume I <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- The Titans — A Conversation Series (Vol. I: Theodore Roosevelt) -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="interactive tool">
+                    <span class="feature-card__icon" aria-hidden="true">🎩</span>
+                    <span class="feature-card__badge" data-type="interactive">Interactive · 50 Titans · Vol. I Live</span>
+                    <h3 class="feature-card__title">The Titans — A Conversation Series</h3>
+                    <p class="feature-card__description">
+                        Fifty titans of FDR World and beyond will step into this study, one at a time — each with a hand-sculpted WebGL face and a hand-built AGI prompt that is nothing like a generic assistant. Each prompt is grounded in that titan's own published writings and distilled into named reasoning frames, paired moral tensions, anti-drift guardrails, and voice constraints that keep the character from flattening into a "helpful chatbot" — plus a voice you can answer back to. Volume I is live: Theodore Roosevelt, whose prompt is built from his own "Strenuous Life" speech, the White House Historical Association biography, and the Miller Center's scholarly brief. Voice input, streaming dialogue, in-character text-to-speech, and a full transcript panel come standard. Connect an OpenRouter model and he'll speak for himself; leave it in demo mode and he still holds his opinions. The next forty-nine are on the way.
+                    </p>
+                    <a href="http://www.fdrworld.com/talk.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Begin the Titans conversation series — Volume I: Theodore Roosevelt">
+                        Meet Titan I — TR <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Carry More Water: A Naev Novel -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="fiction">
+                    <span class="feature-card__icon" aria-hidden="true">📖</span>
+                    <span class="feature-card__badge" data-type="fiction">Fiction · Sci-Fi</span>
+                    <h3 class="feature-card__title">Carry More Water</h3>
+                    <p class="feature-card__description">
+                        An original work of fiction set in the open-source universe of Naev. Twenty-two years after her mother's ordeal for publishing a correction, an archaeologist excavates her faith's true founding document—not a scripture, but a clerk's ledger—and must decide what her mother never lived to decide: whether the truth is a weapon, a debt, or a cup of water.
+                    </p>
+                    <a href="http://www.fdrworld.com/projects/morewater.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Read Carry More Water">
+                        Read Novel <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- The Ramp: A Novel of the Cube Conspiracy, 1921 -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="fiction">
+                    <span class="feature-card__icon" aria-hidden="true">📚</span>
+                    <span class="feature-card__badge" data-type="fiction">Fiction · Alternate History</span>
+                    <h3 class="feature-card__title">The Ramp</h3>
+                    <p class="feature-card__description">
+                        A novel of the Cube Conspiracy, 1921. A man the newspapers had already written off, a strategist the Cube cannot price, and a cavalryman who outlived his war gather five keys from five boroughs to bring down the man who is buying New York — and discover, in the last act, that the city never needed to be told the truth. It needed the truth to have standing.
+                    </p>
+                    <a href="http://www.fdrworld.com/projects/fdrnovel.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Read The Ramp">
+                        Read Novel <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                                <!-- Endless Frontier — 4X -->
+                                <article class="feature-card js-reveal" role="listitem" data-cat="game interactive">
+                                        <span class="feature-card__icon" aria-hidden="true">🚀</span>
+                                        <span class="feature-card__badge" data-type="game">Game · 4X Strategy</span>
+                                        <h3 class="feature-card__title">Endless Frontier</h3>
+                                        <p class="feature-card__description">
+                                                A preliminary 4X strategy game set in the <em>Endless Sky</em> universe, built from scratch in vanilla JavaScript. Explore a procedurally generated galaxy under fog of war, colonize and outpost the frontier, and command four ship classes through tactical doctrine cards, sieges, duels, and boarding actions. Officers age, form rivalries and bonds, complete personal quests, and serve as admirals, governors, or court ministers. Beyond your rival Free Worlds lies a galaxy of minor factions, a hidden Hai civilization, precursor ruins, the Pug, Korath automata, and the late-arriving Wanderer menace. Influence-driven edicts and traditions, a Galactic Community that votes every eight days, war exhaustion, anomalies, and score-based era endings. Three eras, four save slots, and a pass-and-play hotseat mode — the frontier is endless.
+                                        </p>
+                                        <a href="http://www.fdrworld.com/projects/spacegame.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Play Endless Frontier — a bare 4X strategy game set in the Endless Sky universe">
+                                                Enter the Frontier <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                        </a>
+                                </article>
+
+                <!-- GPU Programming for Biologists -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="tool analysis">
+                    <span class="feature-card__icon" aria-hidden="true">🧬</span>
+                    <span class="feature-card__badge" data-type="tool">Technical · Practitioner's Guide</span>
+                    <h3 class="feature-card__title">GPU Programming for Biologists</h3>
+                    <p class="feature-card__description">
+                        A practitioner's guide to accelerating stochastic models, ODEs, and genomic pipelines — from NumPy to bare-metal CUDA. Written for computational biologists, biophysicists, and bioinformaticians who are fluent in Python but bottlenecked by CPU compute. The book covers CuPy, Numba CUDA, Triton, PyCUDA, and the cuBLAS/cuSPARSE stack; the warp-level primitives and shared-memory patterns that unlock real speedups; the trick of defeating thread divergence in stochastic state machines; and a full five-part production case study walking through a 2,000-line cardiac CICR simulator that runs 19,200 calcium release units in seven minutes and scales to a 32-cell electrotonic chain with GJA1 gap-junction modeling. Every pattern is grounded in biological analogy — ribosomes, polysomes, cytoplasmic compartments, extracellular space — because the biology is not a metaphor for the computer science; the computer science is a special case of the biology.
+                    </p>
+                    <a href="http://www.fdrworld.com/projects/gpubiology.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Read GPU Programming for Biologists">
+                        Read Book <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Calm Webplaces -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="interactive">
+                    <span class="feature-card__icon" aria-hidden="true">🌐</span>
+                    <span class="feature-card__badge" data-type="interactive">Interactive · Calm Webplaces</span>
+                    <h3 class="feature-card__title">Calm Webplaces</h3>
+                    <p class="feature-card__description">
+                        Eight browser-native places that sit between a video game and a guided tour — walk, swim, drift, or fly through worlds built for lingering rather than winning. Infinite Desert's sculptable dunes, Infinite Beach's FFT ocean, Guilin River Drift's slow bamboo raft, Abyssal Garden's procedural kelp forest, FlySouth's scenic South Island flight, Here After All's walkable memorial estate, Pebbleland's generative quiet worlds, and K-Hangang's Han River citywalk. No scores, no feeds, usually no accounts. Each opens in a browser tab that are built as a place you can leave restored.
+                    </p>
+                    <a href="http://fdrworld.com/projects/webplaces.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Visit the Calm Webplaces collection">
+                        Visit the Eight <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Infinite Beach — WebGPU + FFT Ocean -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="game interactive">
+                    <span class="feature-card__icon" aria-hidden="true">🏖️</span>
+                    <span class="feature-card__badge" data-type="interactive">Interactive · WebGPU Ocean Simulation</span>
+                    <h3 class="feature-card__title">Infinite Beach</h3>
+                    <p class="feature-card__description">
+                        An infinite procedural shoreline rendered in WebGPU with a true FFT ocean. Four spectral cascades driven by JONSWAP + Donelan-Banner wind physics produce Jacobian crest foam, real sky reflection, and LEAN analytic glitter — while sculptable sand, a castable wave spell, walk/swim/fly modes, and a cinematic "Idyllic Ride" that drifts you through five golden-hour scenic stops let you explore, build, and cast your way down the shore.
+                    </p>
+                    <a href="https://fdrworld.neocities.org/beach" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Explore Infinite Beach — WebGPU + FFT Ocean">
+                        Walk the Beach <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- TALA — Village Utility Device -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="tool analysis">
+                    <span class="feature-card__icon" aria-hidden="true">💡</span>
+                    <span class="feature-card__badge" data-type="tool">Hardware · Off-Grid Engineering</span>
+                    <h3 class="feature-card__title">TALA — Village Utility Device</h3>
+                    <p class="feature-card__description">
+                        A rugged, repairable utility device for the ~733 million people living without reliable electricity: two lights (a true 1 W walking beam and a ~160 lm family diffuser), an AM/FM radio with speaker, USB-C/USB-A phone charging, a 6,000 mAh LiFePO₄ pack fed by a 3.3 W solar panel, and a single-AA backup that takes over on a hardware latch when the main cell runs dry. The Rev A.1 package is a full engineering document — seven functional schematic blocks, cross-sections, an interactive WebGL model, a line-item BOM, cost and distribution economics, and an honest test-and-risk register that marks eleven items PENDING rather than pretending they passed. Stackable, packaging-free, IPX4, 1.5 m drop-rated, built to be fixed rather than replaced. <em>Note: the embedded 3D model is CPU/GPU-heavy — it is best to close the tab shortly after viewing.</em>
+                    </p>
+                    <a href="http://www.fdrworld.com/projects/tala.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="View the TALA Village Utility Device engineering package">
+                        View Engineering Package <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- VELRA — Precision Rotary Shaver -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="tool analysis">
+                    <span class="feature-card__icon" aria-hidden="true">🪒</span>
+                    <span class="feature-card__badge" data-type="tool">Hardware · Precision Engineering</span>
+                    <h3 class="feature-card__title">VELRA — Precision Rotary Shaver</h3>
+                    <p class="feature-card__description">
+                        A full engineering package for a precision rotary shaver — sharp, softly. Three self-sharpening TiN-coated 440C rotors hone themselves against a 17-4 PH foil whose slot edges are deliberately asymmetric (sharp bottom to hone, R 0.15 mm top for skin safety), preloaded at 2.0 N by wave washers inside a ¼-turn twist-lock cartridge that swaps in four seconds without tools. Drive is a sensorless BLDC on Allegro's A89307 self-commutating driver — no firmware commutation table, just SPEED and EN — fed by a 14500 LiFePO₄ cell with onboard 1S protection, a BQ25185 LFP charger, and USB-C. The Rev C document includes third-angle mechanical views, a cross-section, four functional schematic blocks, a detail drawing of the honing interface, a 28-line BOM, and an interactive WebGL model with an Exploded and a Blades view that lifts the cartridge to expose the rotors and motor. <em>Note: the embedded 3D model is CPU/GPU-heavy — it is best to close the tab shortly after viewing.</em>
+                    </p>
+                    <a href="http://www.fdrworld.com/projects/shaver.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="View the VELRA Precision Rotary Shaver engineering package">
+                        View Engineering Package <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- March of the 10,000 -->
+                <article class="feature-card js-reveal" role="listitem" data-cat="game">
+                    <span class="feature-card__icon" aria-hidden="true">🏹</span>
+                    <span class="feature-card__badge" data-type="game">Game · Action Shooter</span>
+                    <h3 class="feature-card__title">March of the 10,000</h3>
+                    <p class="feature-card__description">
+                        Blast a path through the Persian Empire in this relentless action gauntlet. Dodge screen-filling barrages and unleash volleys to cut through waves of enemies. Xenophon's retreat just got hardcore.
+                    </p>
+                    <a href="http://www.fdrworld.com/game5/game86.html" class="feature-card__link" target="_blank" rel="noopener noreferrer" aria-label="Play March of the 10,000">
+                        Play Game <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Empty state (only visible when filters return 0) -->
+                <div class="project-empty" id="projectEmpty" role="status" aria-live="polite">
+                    <span class="project-empty__icon" aria-hidden="true">🔍</span>
+                    No projects match your filters. Try a different search or category.
+                </div>
+
+            </div>
+            </div>
+            <!-- /project-timeline -->
+        </section>
+
+        <hr class="divider" aria-hidden="true" />
+
+        <!-- Media Gallery Section -->
+        <section class="section" id="gallery" aria-labelledby="gallery-title">
+            <div class="section__header js-reveal">
+                <span class="section__icon emoji-pulse" aria-hidden="true">🖼️</span>
+                <span class="section__eyebrow">Visuals</span>
+                <h2 class="section__title" id="gallery-title">Media Gallery</h2>
+                <p class="section__subtitle">
+                    Key art, gameplay footage, and concept visuals from our projects.
+                </p>
+            </div>
+
+            <div class="gallery-grid">
+
+                <figure class="gallery-item js-reveal">
+                    <img src="http://fdrworld.com/aBbgUDm.jpeg" alt="A man in a fedora stares at the glowing Crystalline Cube on a rain-slicked 1920s street." width="720" height="480" loading="lazy" decoding="async" />
+                    <figcaption class="gallery-item__caption">
+                        <span aria-hidden="true">🧊</span> The Crystalline Cube — Key Art
+                    </figcaption>
+                </figure>
+
+                <figure class="gallery-item js-reveal">
+                    <img src="http://fdrworld.com/Zwf7H2h.png" alt="Pixel art view of a 1920s New York City street." width="720" height="480" loading="lazy" decoding="async" />
+                    <figcaption class="gallery-item__caption">
+                        <span aria-hidden="true">🏙️</span> 1920s New York City — In-Game View
+                    </figcaption>
+                </figure>
+
+                <figure class="gallery-item js-reveal">
+                    <img src="http://fdrworld.com/2gRNfkX.png" alt="Slide from the GPU Technology Conference showing GPU-accelerated genome-wide association studies." width="720" height="480" loading="lazy" decoding="async" />
+                    <figcaption class="gallery-item__caption">
+                        <span aria-hidden="true">💻</span> GPU Technology Conference — GWAS Research
+                    </figcaption>
+                </figure>
+
+            </div>
+
+            <div class="coming-soon js-reveal" aria-live="polite">
+                <span aria-hidden="true">🎥</span> More screenshots, concept art, and gameplay videos coming as development progresses.
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer__content">
+            <a href="http://www.fdrworld.com" class="nav__link--primary" target="_blank" rel="noopener noreferrer" aria-label="Return to FDR World main site">
+                <span aria-hidden="true">←</span> Back to Main Site
+            </a>
+            <p class="footer__text">&copy; 2026 FDR World. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile sticky CTA -->
+    <div class="mobile-cta" id="mobileCta" aria-label="Quick link">
+        <div class="mobile-cta__meta">
+            <strong>FDR World</strong>
+            <span>Creative works &amp; projects</span>
+        </div>
+        <a href="http://www.fdrworld.com" class="mobile-cta__btn">← Main Site</a>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- Particle Canvas -->
+    <canvas id="interaction-canvas" aria-hidden="true"></canvas>
+
+    <script>
+        (function () {
+            'use strict';
+
+            var html = document.documentElement;
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+            function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+            function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+            /* =========================================================
+               1. SCROLL PROGRESS + NAV STATE + MOBILE CTA
+               (single rAF-throttled scroll handler for everything)
+            ========================================================= */
+            var progressBar = $('#scroll-progress');
+            var nav = $('.nav');
+            var mobileCta = $('#mobileCta');
+            var ticking = false;
+
+            function onScroll() {
+                var y = window.pageYOffset || document.documentElement.scrollTop;
+                var max = document.documentElement.scrollHeight - window.innerHeight;
+
+                if (progressBar) {
+                    progressBar.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+                }
+                if (nav) nav.classList.toggle('scrolled', y > 50);
+                if (mobileCta) mobileCta.classList.toggle('show', y > window.innerHeight * 0.6);
+
+                checkReveal();
+                ticking = false;
+            }
+
+            function requestScroll() {
+                if (!ticking) {
+                    ticking = true;
+                    window.requestAnimationFrame(onScroll);
+                }
+            }
+
+            window.addEventListener('scroll', requestScroll, { passive: true });
+            window.addEventListener('resize', requestScroll, { passive: true });
+
+            /* =========================================================
+               2. SCROLL REVEAL  (mobile-safe — no IntersectionObserver
+                  dependency, never leaves content permanently hidden)
+            ========================================================= */
+            var revealEls = $$('.js-reveal');
+
+            function checkReveal() {
+                if (!revealEls.length) return;
+                var vh = window.innerHeight || document.documentElement.clientHeight;
+
+                for (var i = revealEls.length - 1; i >= 0; i--) {
+                    var el = revealEls[i];
+
+                    if (el.classList.contains('is-visible')) {
+                        revealEls.splice(i, 1);
+                        continue;
+                    }
+
+                    var rect = el.getBoundingClientRect();
+
+                    // Skip elements that are display:none (filtered out) —
+                    // their rect is all zeros.
+                    if (rect.width === 0 && rect.height === 0) continue;
+
+                    // Reveal as soon as the element's top edge is inside the
+                    // viewport (with a small 8% head start) and it isn't
+                    // already scrolled past the top.
+                    if (rect.top < vh * 0.92 && rect.bottom > 0) {
+                        revealEls.splice(i, 1);
+                        revealElement(el);
+                    }
+                }
+            }
+
+            function revealElement(el) {
+                var delay = parseFloat(el.dataset.revealDelay || '0');
+                if (!reduceMotion && delay > 0) {
+                    el.style.transitionDelay = delay + 's';
+                    window.setTimeout(function () { el.style.transitionDelay = ''; }, (delay + 0.9) * 1000);
+                }
+                el.classList.add('is-visible');
+            }
+
+            function forceRevealAll() {
+                $$('.js-reveal').forEach(function (el) {
+                    el.classList.add('is-visible');
+                    el.style.transitionDelay = '';
+                });
+                revealEls.length = 0;
+            }
+
+            // Stagger the first few cards a little
+            $$('#projectGrid .feature-card').forEach(function (card, i) {
+                card.dataset.revealDelay = String((i % 3) * 0.07);
+            });
+
+            if (reduceMotion) {
+                forceRevealAll();
+            } else {
+                checkReveal();
+                // Safety net: if for any reason something is still hidden but
+                // in view after load, reveal it. Guarantees content is never
+                // permanently invisible.
+                window.addEventListener('load', function () {
+                    checkReveal();
+                    window.setTimeout(checkReveal, 300);
+                    window.setTimeout(checkReveal, 1200);
+                });
+            }
+
+            /* =========================================================
+               3. THEME TOGGLE
+            ========================================================= */
+            var themeBtn = $('#theme-toggle');
+            var moonSVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+            var sunSVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+
+            var storedTheme = null;
+            try { storedTheme = localStorage.getItem('fdr-projects-theme'); } catch (e) { }
+
+            var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var currentTheme = storedTheme || (systemDark ? 'dark' : 'light');
+
+            function applyTheme(t) {
+                currentTheme = t;
+                html.setAttribute('data-theme', t);
+                var isDark = (t === 'dark');
+                if (themeBtn) {
+                    themeBtn.innerHTML = isDark ? moonSVG : sunSVG;
+                    themeBtn.setAttribute('aria-label', 'Switch to ' + (isDark ? 'light' : 'dark') + ' mode');
+                }
+                try { localStorage.setItem('fdr-projects-theme', t); } catch (e) { }
+            }
+
+            applyTheme(currentTheme);
+
+            if (themeBtn) {
+                themeBtn.addEventListener('click', function () {
+                    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+                });
+            }
+
+            /* =========================================================
+               4. MOBILE NAV PANEL
+            ========================================================= */
+            var menuToggle = $('#navMenuToggle');
+            var mobilePanel = $('#navMobilePanel');
+            var mobileClose = $('#navMobileClose');
+            var lastFocused = null;
+
+            function openMobileMenu() {
+                if (!mobilePanel) return;
+                lastFocused = document.activeElement;
+                mobilePanel.classList.add('open');
+                mobilePanel.setAttribute('aria-hidden', 'false');
+                if (menuToggle) menuToggle.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+                if (mobileClose) mobileClose.focus();
+            }
+
+            function closeMobileMenu() {
+                if (!mobilePanel) return;
+                mobilePanel.classList.remove('open');
+                mobilePanel.setAttribute('aria-hidden', 'true');
+                if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+                if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+            }
+
+            if (menuToggle) menuToggle.addEventListener('click', openMobileMenu);
+            if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
+
+            $$('.nav-mobile-panel__link').forEach(function (link) {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && mobilePanel && mobilePanel.classList.contains('open')) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Close the panel if the viewport grows past the mobile breakpoint
+            window.addEventListener('resize', function () {
+                if (window.innerWidth > 768 && mobilePanel && mobilePanel.classList.contains('open')) {
+                    closeMobileMenu();
+                }
+            }, { passive: true });
+
+            /* =========================================================
+               5. CHAPTER BAR SCROLL-SPY
+            ========================================================= */
+            var chapterLinks = $$('.chapter-link');
+
+            if (chapterLinks.length && 'IntersectionObserver' in window) {
+                var chapterMap = {};
+                chapterLinks.forEach(function (l) {
+                    var id = l.getAttribute('href').slice(1);
+                    chapterMap[id] = l;
+                });
+
+                var spy = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (!entry.isIntersecting) return;
+                        chapterLinks.forEach(function (l) { l.classList.remove('is-active'); });
+                        var link = chapterMap[entry.target.id];
+                        if (link) link.classList.add('is-active');
+                    });
+                }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+                Object.keys(chapterMap).forEach(function (id) {
+                    var section = document.getElementById(id);
+                    if (section) spy.observe(section);
+                });
+            }
+
+            /* =========================================================
+               6. TOAST
+            ========================================================= */
+            var toastTimer = null;
+            function showToast(msg) {
+                var t = $('#toast');
+                if (!t) return;
+                t.textContent = msg;
+                t.classList.add('show');
+                window.clearTimeout(toastTimer);
+                toastTimer = window.setTimeout(function () { t.classList.remove('show'); }, 2400);
+            }
+            window.showToast = showToast;
+
+            /* =========================================================
+               7. PROJECT SEARCH + FILTERS
+            ========================================================= */
+            var projectSearch = $('#projectSearch');
+            var chips = $$('.chip');
+            var projectCards = $$('#projectGrid .feature-card');
+            var countEl = $('#projectCount');
+            var emptyEl = $('#projectEmpty');
+            var activeFilter = 'all';
+            var searchTimer = null;
+
+            function applyFilters() {
+                var q = (projectSearch ? projectSearch.value : '').trim().toLowerCase();
+                var shown = 0;
+
+                projectCards.forEach(function (card) {
+                    var text = (card.textContent || '').toLowerCase();
+                    var matchesText = !q || text.indexOf(q) !== -1;
+                    var cats = (card.dataset.cat || '').split(/\s+/);
+                    var matchesCat = (activeFilter === 'all') || cats.indexOf(activeFilter) !== -1;
+                    var visible = matchesText && matchesCat;
+
+                    card.classList.toggle('is-hidden', !visible);
+
+                    if (visible) {
+                        shown++;
+                        // Make sure a card that was hidden by a previous filter
+                        // is never stuck in the invisible pre-reveal state.
+                        if (!card.classList.contains('is-visible')) {
+                            card.classList.add('is-visible');
+                            card.style.transitionDelay = '';
+                            var idx = revealEls.indexOf(card);
+                            if (idx > -1) revealEls.splice(idx, 1);
+                        }
+                    }
+                });
+
+                if (countEl) {
+                    countEl.textContent = shown + (shown === 1 ? ' Project' : ' Projects');
+                }
+                if (emptyEl) {
+                    emptyEl.classList.toggle('is-visible', shown === 0);
+                }
+                // Re-calculate card deal positions after filtering so cards that
+                // jumped into view settle immediately instead of waiting for the
+                // next scroll event.
+                window.dispatchEvent(new Event('scroll'));
+            }
+
+            chips.forEach(function (chip) {
+                chip.addEventListener('click', function () {
+                    chips.forEach(function (c) {
+                        c.classList.remove('is-active');
+                        c.setAttribute('aria-pressed', 'false');
+                    });
+                    chip.classList.add('is-active');
+                    chip.setAttribute('aria-pressed', 'true');
+                    activeFilter = chip.dataset.filter || 'all';
+                    applyFilters();
+                });
+            });
+
+            if (projectSearch) {
+                projectSearch.addEventListener('input', function () {
+                    window.clearTimeout(searchTimer);
+                    searchTimer = window.setTimeout(applyFilters, 120);
+                });
+                projectSearch.addEventListener('search', applyFilters);
+                // Prevent the page from reloading if the field is ever wrapped in a form
+                projectSearch.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') { e.preventDefault(); applyFilters(); }
+                });
+            }
+
+            // Initial count
+            applyFilters();
+
+            /* =========================================================
+               8. IMAGE ERROR FALLBACKS (e.g. mixed-content blocking)
+            ========================================================= */
+            $$('.gallery-item img').forEach(function (img) {
+                function markBroken() {
+                    var fig = img.closest('.gallery-item');
+                    if (fig) fig.classList.add('media-error');
+                }
+                if (img.complete && img.naturalWidth === 0) {
+                    markBroken();
+                } else {
+                    img.addEventListener('error', markBroken);
+                }
+            });
+
+            /* =========================================================
+               9. PARTICLE SYSTEM (desktop hover only, sleeps when idle)
+            ========================================================= */
+            var canvas = $('#interaction-canvas');
+            var ctx = (canvas && canvas.getContext) ? canvas.getContext('2d', { alpha: true }) : null;
+            var W = 0, H = 0;
+            var particles = [];
+            var rafId = null;
+
+            function resizeCanvas() {
+                if (!canvas) return;
+                W = canvas.width = window.innerWidth;
+                H = canvas.height = window.innerHeight;
+            }
+
+            var DARK_PALETTE = ['#FFD700', '#D4AF37', '#FF6B35', '#ffffff'];
+            var LIGHT_PALETTE = ['#B8860B', '#CD7F32', '#D2691E', '#8B4513'];
+
+            function Particle(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 2.4 + 0.5;
+                var ang = Math.random() * Math.PI * 2;
+                var spd = Math.random() * 1.8 + 0.4;
+                this.vx = Math.cos(ang) * spd;
+                this.vy = Math.sin(ang) * spd;
+                this.life = 1.0;
+                var pal = (html.getAttribute('data-theme') === 'dark') ? DARK_PALETTE : LIGHT_PALETTE;
+                this.color = pal[Math.floor(Math.random() * pal.length)];
+            }
+
+            Particle.prototype.update = function () {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vx *= 0.93;
+                this.vy *= 0.93;
+                this.vy -= 0.018;
+                this.life -= 0.022;
+                this.size *= 0.97;
+            };
+
+            Particle.prototype.draw = function () {
+                ctx.globalAlpha = Math.max(0, this.life);
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, Math.max(0.1, this.size), 0, Math.PI * 2);
+                ctx.fill();
+            };
+
+            function particleLoop() {
+                ctx.clearRect(0, 0, W, H);
+                for (var i = particles.length - 1; i >= 0; i--) {
+                    var p = particles[i];
+                    p.update();
+                    if (p.life <= 0 || p.size < 0.1) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+                    p.draw();
+                }
+                ctx.globalAlpha = 1;
+                if (particles.length > 0) {
+                    rafId = window.requestAnimationFrame(particleLoop);
+                } else {
+                    rafId = null;
+                }
+            }
+
+            function kickParticles() {
+                if (rafId === null) rafId = window.requestAnimationFrame(particleLoop);
+            }
+
+            function spawnAt(x, y, n) {
+                // Cap total particles so long hover sessions stay cheap
+                if (particles.length > 260) return;
+                for (var i = 0; i < n; i++) {
+                    var ox = (Math.random() - 0.5) * 12;
+                    var oy = (Math.random() - 0.5) * 12;
+                    particles.push(new Particle(x + ox, y + oy));
+                }
+            }
+
+            if (canvas && ctx && !reduceMotion && canHover) {
+                window.addEventListener('resize', resizeCanvas, { passive: true });
+                resizeCanvas();
+
+                $$('.feature-card, .gallery-item').forEach(function (card) {
+                    card.addEventListener('mousemove', function (e) {
+                        spawnAt(e.clientX, e.clientY, 3);
+                        kickParticles();
+                    });
+                    card.addEventListener('mouseenter', function (e) {
+                        spawnAt(e.clientX, e.clientY, 12);
+                        kickParticles();
+                    });
+                });
+            }
+
+            /* =========================================================
+               10. CONSOLE EASTER EGG
+            ========================================================= */
+            console.log('%c🧊 FDR World Projects', 'color:#FF6B35;font-size:22px;font-weight:bold;');
+            console.log('%cExplore our creative works and expertise.', 'color:#D4AF37;font-size:14px;font-style:italic;');
+
+        })();
+    </script>
+
+    <!-- ===================================================================
+         INK-WASH SPLASH ENGINE (grafted from index_v50)
+         Drives targetProgress/currentProgress from window.scrollY and
+         writes transforms + opacity on the dual-layer splash stage +
+         breathing cx/cy/radius wobble on the SVG ink-blot circle.
+         Skips entirely on prefers-reduced-motion.
+    ==================================================================== -->
+    <script>
+    (() => {
+      'use strict';
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const stage     = document.querySelector('.fdr-splash-stage');
+      const splashImg = document.getElementById('fdr-splash-img');
+      const inkRim    = document.getElementById('ink-blot-rim');
+      const inkCircle = document.getElementById('ink-blot-circle');
+      const inkScale  = document.getElementById('ink-bleed-scale');
+      const bgLayer   = document.getElementById('fdr-bg-layer');
+      const fgLayer   = document.getElementById('fdr-fg-layer');
+      if (!stage) return;
+
+      function computeInkParams() {
+        const isMobile = window.matchMedia('(max-width: 833px)').matches;
+        return {
+          baseRadius:   isMobile ? 280  : 420,
+          radiusGrowth: isMobile ? 950 : 1050,
+          bgScaleBase:  isMobile ? 1.08 : 1.02,
+          bgScaleGrow:  isMobile ? 0.18 : 0.08,
+          bgPan:        isMobile ? 9    : 3,
+          fgScaleBase:  isMobile ? 1.10 : 1.05,
+          fgScaleGrow:  isMobile ? 0.50 : 0.28,
+          fgPan:        isMobile ? 15   : 6,
+          edgeScale:    isMobile ? 240  : 140,
+          scrollVH:     isMobile ? 1.5  : 1.6,
+          damping:      isMobile ? 0.12 : 0.08
+        };
+      }
+      let inkParams = computeInkParams();
+
+      let targetProgress = 0;
+      let currentProgress = 0;
+
+      function onScroll() {
+        const activeScrollWindow = Math.max(1, window.innerHeight * inkParams.scrollVH);
+        targetProgress = Math.min(1, Math.max(0, window.scrollY / activeScrollWindow));
+      }
+
+      function animateStage() {
+        currentProgress += (targetProgress - currentProgress) * inkParams.damping;
+
+        const bgScale      = inkParams.bgScaleBase + currentProgress * inkParams.bgScaleGrow;
+        const bgTranslateY = currentProgress * inkParams.bgPan;
+        if (bgLayer) {
+          bgLayer.style.transform =
+            `scale(${bgScale.toFixed(4)}) translateY(${bgTranslateY.toFixed(2)}%)`;
+        }
+
+        const fgScale      = inkParams.fgScaleBase + currentProgress * inkParams.fgScaleGrow;
+        const fgTranslateY = -(currentProgress * inkParams.fgPan);
+        if (fgLayer) {
+          fgLayer.style.transform =
+            `scale(${fgScale.toFixed(4)}) translateY(${fgTranslateY.toFixed(2)}%)`;
+        }
+
+        const t = performance.now() / 1000;
+        const visible = parseFloat(stage.style.opacity || '1') > 0.01;
+
+        const slowBreath  = Math.sin(t * 1.4) * 22;
+        const fastFlicker = Math.sin(t * 3.8) * 10;
+        const cxDrift     = Math.sin(t * 0.6) * 8;
+        const cyDrift     = Math.cos(t * 0.8) * 6;
+
+        const radius = inkParams.baseRadius + currentProgress * inkParams.radiusGrowth;
+        if (inkCircle) {
+          const r = visible ? radius + slowBreath + fastFlicker : radius;
+          inkCircle.setAttribute('r', r.toFixed(1));
+          if (visible) {
+            inkCircle.setAttribute('cx', (960 + cxDrift).toFixed(1));
+            inkCircle.setAttribute('cy', (540 + cyDrift).toFixed(1));
+          } else {
+            inkCircle.setAttribute('cx', '960');
+            inkCircle.setAttribute('cy', '540');
+          }
+        }
+
+        if (inkScale && visible) {
+          const edge = inkParams.edgeScale
+                     + Math.sin(t * 0.9) * 40
+                     + Math.sin(t * 2.7) * 18;
+          inkScale.setAttribute('scale', edge.toFixed(1));
+        }
+
+        const baseOpacity =
+          parseFloat(getComputedStyle(stage).getPropertyValue('--stage-base-opacity')) || 0.72;
+        const stageOpacity = Math.max(0, baseOpacity * (1 - currentProgress));
+        stage.style.opacity = stageOpacity.toFixed(3);
+
+        const inkOpacity = Math.max(0, 1 - currentProgress);
+        if (splashImg) splashImg.style.opacity = inkOpacity.toFixed(3);
+        if (inkRim)    inkRim.style.opacity    = inkOpacity.toFixed(3);
+
+        requestAnimationFrame(animateStage);
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', () => { inkParams = computeInkParams(); onScroll(); });
+      onScroll();
+      requestAnimationFrame(animateStage);
+    })();
+    </script>
+
+    <!-- ===================================================================
+         PAGE-LEVEL THREE.JS STARFIELD (grafted from index_v50)
+         • 20k field stars + 8k banded milky-way stars
+         • ShaderMaterial nebula sphere with value-noise dust bands
+         • Two additive sun sprites (canvas-generated radial textures)
+         • 3,000-particle dust cloud
+         • Starts/stops on theme change + visibilitychange (no GPU burn
+           in light mode or backgrounded tabs)
+         • Camera.position.y tracks window.scrollY for subtle parallax tilt
+    ==================================================================== -->
+    <script>
+    (function() {
+      'use strict';
+
+      const container = document.getElementById('starfield-container');
+      if (!container || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 50000);
+      camera.position.set(0, 0, 0);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setClearColor(0x000000, 0);
+      container.appendChild(renderer.domElement);
+
+      function makeStarPoints(count, radiusMin, radiusMax, banded) {
+        const pos = new Float32Array(count * 3);
+        const col = new Float32Array(count * 3);
+        for (let i = 0; i < count; i++) {
+          const r = radiusMin + Math.random() * (radiusMax - radiusMin);
+          const th = Math.random() * Math.PI * 2;
+          let y;
+          if (banded) {
+            y = (Math.random() + Math.random() + Math.random() + Math.random() - 2) * 0.10;
+          } else {
+            y = 2 * Math.random() - 1;
+          }
+          const cosY = Math.sqrt(Math.max(0, 1 - y * y));
+          pos[i * 3]     = r * cosY * Math.cos(th);
+          pos[i * 3 + 1] = r * y;
+          pos[i * 3 + 2] = r * cosY * Math.sin(th);
+
+          let b = banded ? (0.45 + Math.random() * 0.55) : (0.30 + Math.random() * 0.70);
+          const warm = Math.random();
+          if (warm < 0.06) {
+            col[i * 3]     = b * 0.85;
+            col[i * 3 + 1] = b * 0.92;
+            col[i * 3 + 2] = b * 1.0;
+          } else if (warm > 0.94) {
+            col[i * 3]     = b * 1.0;
+            col[i * 3 + 1] = b * 0.82;
+            col[i * 3 + 2] = b * 0.60;
+          } else {
+            col[i * 3]     = b;
+            col[i * 3 + 1] = b * (0.85 + Math.random() * 0.15);
+            col[i * 3 + 2] = b * (0.95 + Math.random() * 0.05);
+          }
+        }
+        const g = new THREE.BufferGeometry();
+        g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        g.setAttribute('color', new THREE.BufferAttribute(col, 3));
+        return new THREE.Points(g, new THREE.PointsMaterial({
+          size: 10.0,
+          vertexColors: true,
+          transparent: true,
+          opacity: 0.9,
+          sizeAttenuation: true,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          fog: false
+        }));
+      }
+
+      const stars = makeStarPoints(20000, 3000, 17000, false);
+      const milkyStars = makeStarPoints(8000, 3200, 16000, true);
+      milkyStars.material.size = 12.0;
+      milkyStars.material.opacity = 0.75;
+      scene.add(stars);
+      scene.add(milkyStars);
+
+      const nebulaMat = new THREE.ShaderMaterial({
+        side: THREE.BackSide,
+        depthWrite: false,
+        fog: false,
+        uniforms: { uTime: { value: 0 } },
+        vertexShader: `
+          varying vec3 vDir;
+          void main(){
+            vDir = normalize(position);
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }`,
+        fragmentShader: `
+          varying vec3 vDir;
+          uniform float uTime;
+
+          float hash(vec3 p){
+            p = fract(p * 0.3183099 + vec3(0.1, 0.2, 0.3));
+            p *= 17.0;
+            return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
+          }
+          float noise(vec3 x){
+            vec3 i = floor(x);
+            vec3 f = fract(x);
+            f = f * f * (3.0 - 2.0 * f);
+            return mix(mix(mix(hash(i + vec3(0,0,0)), hash(i + vec3(1,0,0)), f.x),
+                           mix(hash(i + vec3(0,1,0)), hash(i + vec3(1,1,0)), f.x), f.y),
+                       mix(mix(hash(i + vec3(0,0,1)), hash(i + vec3(1,0,1)), f.x),
+                           mix(hash(i + vec3(0,1,1)), hash(i + vec3(1,1,1)), f.x), f.y), f.z);
+          }
+
+          void main(){
+            float y = vDir.y * 0.5 + 0.5;
+            vec3 deepSpace = vec3(0.005, 0.009, 0.030);
+            vec3 midBlue   = vec3(0.014, 0.030, 0.082);
+            vec3 dust      = vec3(0.085, 0.040, 0.095);
+            vec3 magenta   = vec3(0.140, 0.036, 0.115);
+            vec3 cyan      = vec3(0.020, 0.078, 0.110);
+
+            vec3 col = mix(deepSpace, midBlue, smoothstep(0.0, 1.0, y));
+            float band = exp(-pow((vDir.y - 0.06) * 2.8, 2.0));
+            col += dust * band * 0.95;
+            float core = exp(-pow((vDir.y - 0.04) * 9.5, 2.0));
+            col += vec3(0.110, 0.098, 0.150) * core * 0.85;
+            float glowX = exp(-pow((vDir.x - 0.22) * 3.8, 2.0));
+            float glowY = exp(-pow((vDir.y + 0.14) * 5.0, 2.0));
+            col += magenta * glowX * glowY * 0.55;
+            float cyanBand = exp(-pow((vDir.z + 0.28) * 5.0, 2.0));
+            col += cyan * cyanBand * 0.40;
+
+            vec3 np = vDir * 3.2 + vec3(uTime * 0.006, 0.0, uTime * 0.004);
+            float n = noise(np) * 0.5 + noise(np * 2.1) * 0.3 + noise(np * 4.3) * 0.2;
+            col += vec3(0.028, 0.020, 0.042) * (n * n) * band * 1.6;
+
+            float shim = 0.5 + 0.5 * sin(uTime * 0.05 + vDir.x * 6.0 + vDir.z * 4.0);
+            col += vec3(0.010, 0.014, 0.024) * shim;
+            gl_FragColor = vec4(col, 1.0);
+          }`
+      });
+      scene.add(new THREE.Mesh(new THREE.SphereGeometry(20000, 48, 48), nebulaMat));
+
+      function createSunCoreTexture() {
+        const S = 512;
+        const c = document.createElement('canvas');
+        c.width = c.height = S;
+        const ctx = c.getContext('2d');
+        const cx = S / 2;
+        const g = ctx.createRadialGradient(cx, cx, 0, cx, cx, cx);
+        g.addColorStop(0.00, 'rgba(255,255,250,1.00)');
+        g.addColorStop(0.06, 'rgba(255,252,225,1.00)');
+        g.addColorStop(0.14, 'rgba(255,240,190,0.95)');
+        g.addColorStop(0.28, 'rgba(255,215,140,0.65)');
+        g.addColorStop(0.50, 'rgba(255,170,90,0.26)');
+        g.addColorStop(0.72, 'rgba(200,110,60,0.07)');
+        g.addColorStop(1.00, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, S, S);
+        return new THREE.CanvasTexture(c);
+      }
+
+      function createSunHaloTexture() {
+        const S = 256;
+        const c = document.createElement('canvas');
+        c.width = c.height = S;
+        const ctx = c.getContext('2d');
+        const g = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+        g.addColorStop(0.00, 'rgba(255,240,200,0.55)');
+        g.addColorStop(0.30, 'rgba(255,210,140,0.30)');
+        g.addColorStop(0.65, 'rgba(255,160,90,0.08)');
+        g.addColorStop(1.00, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, S, S);
+        return new THREE.CanvasTexture(c);
+      }
+
+      const SUN_POS = new THREE.Vector3(-3800, 1600, -6800);
+
+      const sunHalo = new THREE.Sprite(new THREE.SpriteMaterial({
+        map: createSunHaloTexture(),
+        color: 0xfff0cc,
+        transparent: true,
+        opacity: 0.85,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+        fog: false
+      }));
+      sunHalo.position.copy(SUN_POS);
+      sunHalo.scale.set(2800, 2800, 1);
+      scene.add(sunHalo);
+
+      const sunCore = new THREE.Sprite(new THREE.SpriteMaterial({
+        map: createSunCoreTexture(),
+        color: 0xfff8e0,
+        transparent: true,
+        opacity: 1.0,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+        fog: false
+      }));
+      sunCore.position.copy(SUN_POS);
+      sunCore.scale.set(1500, 1500, 1);
+      scene.add(sunCore);
+
+      const companion = new THREE.Sprite(new THREE.SpriteMaterial({
+        map: createSunHaloTexture(),
+        color: 0xff8866,
+        transparent: true,
+        opacity: 0.55,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+        fog: false
+      }));
+      companion.position.set(5200, -1400, 4600);
+      companion.scale.set(420, 420, 1);
+      scene.add(companion);
+
+      const dustCount = 3000;
+      const dustGeo = new THREE.BufferGeometry();
+      const dustPos = new Float32Array(dustCount * 3);
+      for (let i = 0; i < dustCount; i++) {
+        dustPos[i*3]   = (Math.random()-0.5) * 3000;
+        dustPos[i*3+1] = (Math.random()-0.5) * 3000;
+        dustPos[i*3+2] = (Math.random()-0.5) * 3000;
+      }
+      dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+      const dustMat = new THREE.PointsMaterial({
+        size: 1.5, color: 0x446688, transparent: true, opacity: 0.3,
+        blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true
+      });
+      const dustCloud = new THREE.Points(dustGeo, dustMat);
+      scene.add(dustCloud);
+
+      const clock = new THREE.Clock();
+      let rafId = null;
+      let scrollY = 0;
+
+      function animate() {
+        rafId = requestAnimationFrame(animate);
+        const t = clock.getElapsedTime();
+
+        // Subtle parallax tilt: camera.position.y tracks scroll.
+        camera.position.y = scrollY * 0.01;
+        camera.lookAt(0, camera.position.y * 0.5, -1);
+
+        stars.rotation.y = t * 0.0035;
+        stars.rotation.x = t * 0.001;
+        milkyStars.rotation.y = t * 0.0030;
+        milkyStars.rotation.x = t * 0.0008;
+        dustCloud.rotation.y = t * 0.01;
+        dustCloud.rotation.x = t * 0.005;
+
+        nebulaMat.uniforms.uTime.value = t;
+
+        renderer.render(scene, camera);
+      }
+
+      function start() {
+        if (rafId === null) {
+          clock.getDelta();
+          animate();
+        }
+      }
+      function stop() {
+        if (rafId !== null) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+      }
+
+      function updateActive() {
+        // Theme is set on <html> (the original code reads/writes
+        // document.documentElement.getAttribute('data-theme')).
+        var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark && !document.hidden) start();
+        else stop();
+      }
+
+      // Observe both <html> and <body> for theme changes — the existing
+      // theme-toggle JS in this file writes to <html>, but a MutationObserver
+      // attached to <body> won't catch that. Attach to <html> instead.
+      if (typeof MutationObserver !== 'undefined' && document.documentElement) {
+        new MutationObserver(updateActive).observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['data-theme']
+        });
+      }
+      document.addEventListener('visibilitychange', updateActive);
+
+      window.addEventListener('scroll', function () {
+        scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      }, { passive: true });
+
+      let resizeTimer = null;
+      function handleResize() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          const w = window.innerWidth;
+          const h = window.innerHeight;
+          if (w === 0 || h === 0) return;
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+          renderer.setSize(w, h);
+        }, 120);
+      }
+      window.addEventListener('resize', handleResize);
+
+      updateActive();
+
+    })();
+    </script>
+
+    <!-- ===================================================================
+         MEGA-MENU + MOBILE ACCORDION + CARD "DEAL" ANIMATION (FIXED)
+
+         BUG-FIX HISTORY (v15 → v16):
+           • v14/v15 bug: the deal stagger was `i * 0.15`, so card index ≥ 7
+             had stagger > 1.0, which exceeded the clamped `progress ∈ [0,1]`
+             ceiling. Cards 7+ were permanently frozen mid-deal, with
+             rotation = (15 − i × 5)° growing to −85° at i=20 — visible
+             while transformed, because `.js-reveal.is-visible { opacity: 1 }`
+             (specificity 0,3,0) beat `.feature-card { opacity: var(--deal-opacity) }`
+             (specificity 0,1,0).
+
+         FIX (per-card viewport tracking):
+           • progress is computed PER-CARD from each card's own
+             getBoundingClientRect().top vs vh*0.92 → vh*0.55.
+           • stagger is (i % 3) * 0.06, capped so EVERY card can finish.
+           • rotation base is bounded at ±4° (cycles by i%3), so no card
+             ever rotates more than a few degrees sideways.
+           • Strip `.js-reveal` / `.is-visible` from cards up-front so
+             the two systems don't fight over opacity.
+           • Once a card reaches cardProgress = 1, add it to a `dealt`
+             WeakSet and remove `.is-dealing` so the CSS falls back to
+             the native transform/opacity — hover then works cleanly.
+           • On filter changes, dispatch a synthetic 'scroll' event so
+             newly-shown cards immediately settle (handled in
+             applyFilters()).
+           • Skipped on prefers-reduced-motion.
+    ==================================================================== -->
+    <script>
+    (function () {
+        'use strict';
+
+        function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+        function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+
+        /* =========================================================
+           MEGA-MENU — desktop hover/click reveal
+        ========================================================= */
+        var navItems = $$('.nav__item[data-dropdown]');
+        var flyout   = $('#navMega');
+        var overlay  = $('#navOverlay');
+
+        var closeTimeout = null;
+
+        function openMenu() {
+            clearTimeout(closeTimeout);
+            document.body.classList.add('nav-open');
+            if (flyout) flyout.setAttribute('aria-hidden', 'false');
+            navItems.forEach(function (item) {
+                var link = item.querySelector('.nav__link');
+                if (link) link.setAttribute('aria-expanded', 'true');
+            });
+        }
+        function closeAllMenus() {
+            clearTimeout(closeTimeout);
+            closeTimeout = setTimeout(function () {
+                document.body.classList.remove('nav-open');
+                if (flyout) flyout.setAttribute('aria-hidden', 'true');
+                navItems.forEach(function (item) {
+                    var link = item.querySelector('.nav__link');
+                    if (link) link.setAttribute('aria-expanded', 'false');
+                });
+            }, 120);
+        }
+
+        if (isDesktop) {
+            navItems.forEach(function (item) {
+                item.addEventListener('mouseenter', openMenu);
+                item.addEventListener('mouseleave', closeAllMenus);
+                var link = item.querySelector('.nav__link');
+                if (link) {
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        openMenu();
+                    });
+                }
+            });
+            if (flyout) flyout.addEventListener('mouseenter', function () { clearTimeout(closeTimeout); });
+            if (flyout) flyout.addEventListener('mouseleave', closeAllMenus);
+            if (overlay) overlay.addEventListener('click', closeAllMenus);
+            $$('.mega-link').forEach(function (link) {
+                link.addEventListener('click', closeAllMenus);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+                    closeAllMenus();
+                }
+            });
+        }
+
+        /* =========================================================
+           MOBILE ACCORDION — tap-reveal grid-rows 0fr→1fr
+        ========================================================= */
+        $$('.mnav-acc__head').forEach(function (head) {
+            head.addEventListener('click', function () {
+                var item = head.parentElement;
+                var isOpen = item.getAttribute('data-open') === 'true';
+
+                $$('.mnav-acc').forEach(function (other) {
+                    if (other !== item) {
+                        other.setAttribute('data-open', 'false');
+                        other.querySelector('.mnav-acc__head').setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                item.setAttribute('data-open', isOpen ? 'false' : 'true');
+                head.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+            });
+        });
+
+        $$('.mnav-acc__link').forEach(function (link) {
+            link.addEventListener('click', function () {
+                var close = $('#navMobileClose');
+                if (close) close.click();
+            });
+        });
+
+        /* =========================================================
+           CARD "DEAL" ANIMATION — per-card viewport tracking (FIXED)
+
+           Each card computes its OWN progress from its bounding
+           rect, so cards animate as they enter the viewport rather
+           than on a global section timer. The stagger is small and
+           bounded ((i % 3) * 0.06) so EVERY card can reach
+           cardProgress = 1 regardless of grid length. Rotation is
+           capped at ±4°. Settled cards are handed back to native
+           CSS so hover works cleanly.
+
+           Cards' `.js-reveal` class is removed up-front so the
+           `.js .js-reveal.is-visible { opacity: 1 }` rule (which
+           would otherwise beat `.feature-card.is-dealing { opacity:
+           var(--deal-opacity) }` on specificity) doesn't leave a
+           frozen card visible while still transformed.
+        ========================================================= */
+        var dealCards = $$('#projectGrid .feature-card');
+        var dealt = new WeakSet();
+        var dealTicking = false;
+
+        if (dealCards.length > 0 && !reduceMotion) {
+            // Strip the .js-reveal / .is-visible classes from every card
+            // so the two entrance systems don't fight over opacity.
+            dealCards.forEach(function (card) {
+                card.classList.remove('js-reveal', 'is-visible');
+            });
+
+            function updateDeal() {
+                var vh = window.innerHeight || document.documentElement.clientHeight;
+
+                dealCards.forEach(function (card, i) {
+                    if (dealt.has(card)) return;
+
+                    // Skip filtered-out cards (display:none → rect is zeros)
+                    var rect = card.getBoundingClientRect();
+                    if (rect.width === 0 && rect.height === 0) return;
+
+                    // Per-card progress: 0 at vh*0.92, 1 at vh*0.55
+                    var rawProgress = (vh * 0.92 - rect.top) / (vh * 0.37);
+                    // Bounded stagger by column (0, 1, 2) — never grows
+                    var colStagger = (i % 3) * 0.06;
+                    var cardProgress = Math.max(0, Math.min(1, rawProgress - colStagger));
+
+                    // Bounded tilt: ±4° cycling across columns
+                    var baseTilt = ((i % 3) - 1) * 4;
+
+                    card.style.setProperty('--deal-y', ((1 - cardProgress) * 40).toFixed(1) + 'px');
+                    card.style.setProperty('--deal-x', ((1 - cardProgress) * (i % 2 === 0 ? -20 : 20)).toFixed(1) + 'px');
+                    card.style.setProperty('--deal-rotate', ((1 - cardProgress) * baseTilt).toFixed(2) + 'deg');
+                    card.style.setProperty('--deal-opacity', cardProgress.toFixed(3));
+
+                    if (cardProgress >= 1) {
+                        // Card has settled — hand it back to native CSS.
+                        // Remove the .is-dealing class so the deal
+                        // transform/opacity rule stops applying, and
+                        // reset the four custom properties to safe
+                        // defaults so nothing is left over.
+                        card.classList.remove('is-dealing');
+                        card.style.setProperty('--deal-y', '0px');
+                        card.style.setProperty('--deal-x', '0px');
+                        card.style.setProperty('--deal-rotate', '0deg');
+                        card.style.setProperty('--deal-opacity', '1');
+                        dealt.add(card);
+                    } else {
+                        // Mark the card as actively dealing so the deal
+                        // transform + opacity rule kicks in.
+                        card.classList.add('is-dealing');
+                    }
+                });
+                dealTicking = false;
+            }
+
+            function requestDeal() {
+                if (!dealTicking) {
+                    dealTicking = true;
+                    window.requestAnimationFrame(updateDeal);
+                }
+            }
+
+            window.addEventListener('scroll', requestDeal, { passive: true });
+            window.addEventListener('resize', requestDeal, { passive: true });
+            window.addEventListener('load', updateDeal);
+            // Run once after layout so cards above the fold start dealt
+            setTimeout(updateDeal, 50);
+        } else if (dealCards.length > 0 && reduceMotion) {
+            // Reduced-motion users: cards just sit at rest. Make sure
+            // .js-reveal doesn't leave them invisible.
+            dealCards.forEach(function (card) {
+                card.classList.remove('js-reveal');
+            });
+        }
+
+    })();
+    </script>
+</body>
+</html>
